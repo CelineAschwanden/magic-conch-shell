@@ -4,6 +4,10 @@
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Run
+
+Run `npm start`
+
 ## Live reloading
 
 To get live reloading, replace `mainWindow.loadFile(path.join(__dirname, "../dist/magic-conch-shell/index.html"));`
