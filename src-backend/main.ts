@@ -9,11 +9,12 @@ function createWindow(){
         webPreferences: {
             nodeIntegration: true, // Allows IPC and other APIs
         },
-        width: 900,
-        height: 600
+        width: 1200,
+        height: 800
     });
+    mainWindow.removeMenu();
 
-    mainWindow.loadFile(path.join(__dirname, "../dist/magic-conch-shell/index.html"));
+    mainWindow.loadURL('http://localhost:4200/');
 }
 
 app.on("ready", () => {

@@ -7,7 +7,7 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 ## Live reloading
 
 To get live reloading, replace `mainWindow.loadFile(path.join(__dirname, "../dist/magic-conch-shell/index.html"));`
-in the `src-backend/main.ts` with `mainWindow.loadURL('http://localhost:4200/');`.
+in the `src-backend/main.ts` with `mainWindow.loadURL('http://localhost:4200/');` and run `ng serve`.
 
 
 ## Running unit tests
