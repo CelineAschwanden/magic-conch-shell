@@ -4,4 +4,8 @@
     color: blue;
     top: 5px;
     right: 15px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }

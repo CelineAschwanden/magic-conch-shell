@@ -10,15 +10,22 @@ function createWindow(){
             nodeIntegration: true, // Allows IPC and other APIs
         },
         width: 1200,
-        height: 800
+        height: 800,
+        minWidth: 440,
+        minHeight: 540,
+        show: false
     });
     mainWindow.removeMenu();
 
-    mainWindow.loadFile(path.join(__dirname, "../dist/magic-conch-shell/index.html"));
+    mainWindow.loadURL('http://localhost:4200/');
 }
 
 app.on("ready", () => {
     createWindow();
+
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
+      })
 
     app.on("activate", function () {
         // On macOS it's common to re-create a window in the app when the
