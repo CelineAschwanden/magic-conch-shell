@@ -1,8 +1,10 @@
 <div class="card mb-3" *ngIf="notification">
-    <div class="row no-gutters">
-      <div class="col-md-3">
-        <i class="bi bi-hand-thumbs-up" *ngIf="notification.type === Type.answer && notification.content == 'positive'"></i>
-        <i class="bi bi-hand-thumbs-down" *ngIf="notification.type === Type.answer && notification.content == 'negative'"></i>
+    <div class="row no-gutters py-2">
+      <div class="col-md-2 text-center">
+        <!--
+        <i class="bi bi-hand-thumbs-up h1" *ngIf="notification.type === Type.rating && notification.content == 'positive'"></i>
+        <i class="bi bi-hand-thumbs-down h1" *ngIf="notification.type === Type.rating && notification.content == 'negative'"></i>
+        -->
       </div>
       <div class="col-md-8">
         <div class="card-body">
