@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { QuestionComponent } from './question/question.component';
 import { AnswerComponent } from './answer/answer.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { NotifCardComponent } from './notifications/notif-card/notif-card.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,4 +26,4 @@ const routes: Routes = [
 
 export class AppRoutingModule { }
 export const RoutingComponent = [HomeComponent,LoginComponent,RegisterComponent, QuestionComponent,
-  AnswerComponent, NotificationsComponent]
+  AnswerComponent, NotificationsComponent, NotifCardComponent]

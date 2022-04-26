@@ -1,0 +1,19 @@
+<div class="card mb-3" *ngIf="notification">
+    <div class="row no-gutters">
+      <div class="col-md-3">
+        <i class="bi bi-hand-thumbs-up" *ngIf="notification.type === Type.answer && notification.content == 'positive'"></i>
+        <i class="bi bi-hand-thumbs-down" *ngIf="notification.type === Type.answer && notification.content == 'negative'"></i>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <p class="card-text" *ngIf="notification.type === Type.answer">
+            You have received an answer for the following question: "{{ notification.question }}"<br><br>{{ notification.content }}
+          </p>
+          <p class="card-text" *ngIf="notification.type === Type.rating">
+            Your question "{{ notification.question }}"<br>
+            got a thumb <span *ngIf="notification.content == 'positive'; else negative">up</span><ng-template #negative>down</ng-template>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
