@@ -29,6 +29,11 @@ export class NotificationsComponent implements OnInit {
       type: Type.rating,
       content: 'positive',
       question: 'Lorem ipsum dolor sit amet 2'
+    },
+    {
+      type: Type.answer,
+      content: 'This is an answer',
+      question: 'Lorem ipsum dolor sit amet'
     }
   ];
 

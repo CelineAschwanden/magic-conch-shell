@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifCardComponent } from './notifications/notif-card/notif-card.component';
+import { QuestionCardComponent } from './answer/question-card/question-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoutingComponent,
-    NotifCardComponent
+    NotifCardComponent,
+    QuestionCardComponent
   ],
   imports: [
     BrowserModule,

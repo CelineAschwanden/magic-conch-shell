@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Question } from './question-card/question';
 
 @Component({
   selector: 'app-answer',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnswerComponent implements OnInit {
 
-  constructor() { }
+  questionList: Question[] = [
+    { content: "What is the weirdest food combination you enjoy?" },
+    { content: "What fictional character would you most likely be friends with?" }
+  ]
 
+  constructor() { }
   ngOnInit(): void {
   }
 

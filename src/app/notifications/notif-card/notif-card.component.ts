@@ -13,7 +13,6 @@ export class NotifCardComponent implements OnInit {
   Type = Type;
 
   constructor() { }
-
   ngOnInit(): void {
   }
 }
