@@ -9,12 +9,12 @@
             <img class="float-end h-100" id="notification-icon" src="assets/notification_bell.png">
         </div>
         <div class="col">
-            <button class="btn btn-danger float-end">Clear</button>
+            <button class="btn btn-danger float-end" (click)="clearNotifs()">Clear</button>
         </div>
     </div>
 
-    <div class="row h-85 px-5 pb-5 pt-4">
-        <div class="border border-dark px-4 py-4 content-container">
+    <div class="h-85 px-5 pb-5 pt-4 overflow-hidden">
+        <div class=" h-100 border border-dark px-4 py-4 content-container overflow-auto">
             <app-notif-card *ngFor="let notif of notifList" [notification]="notif"></app-notif-card>
         </div>
     </div>

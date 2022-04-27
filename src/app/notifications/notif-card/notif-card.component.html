@@ -1,12 +1,11 @@
-<div class="card mb-3" *ngIf="notification">
+<div class="card sm-3 my-3" *ngIf="notification">
     <div class="row no-gutters py-2">
-      <div class="col-md-2 text-center">
-        <!--
-        <i class="bi bi-hand-thumbs-up h1" *ngIf="notification.type === Type.rating && notification.content == 'positive'"></i>
-        <i class="bi bi-hand-thumbs-down h1" *ngIf="notification.type === Type.rating && notification.content == 'negative'"></i>
-        -->
+      <div class="col-sm-2 py-3 pl-5 text-center">
+        <i class="bi bi-chat-dots" *ngIf="notification.type === Type.answer"></i>
+        <i class="bi bi-hand-thumbs-up" *ngIf="notification.type === Type.rating && notification.content == 'positive'"></i>
+        <i class="bi bi-hand-thumbs-down" *ngIf="notification.type === Type.rating && notification.content == 'negative'"></i>
       </div>
-      <div class="col-md-8">
+      <div class="col-sm-8">
         <div class="card-body">
           <p class="card-text" *ngIf="notification.type === Type.answer">
             You have received an answer for the following question: "{{ notification.question }}"<br><br>{{ notification.content }}
