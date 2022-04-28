@@ -1,17 +1,25 @@
-<div class="card sm-3 my-3" *ngIf="question">
-  <div class="row no-gutters justify-content-end py-2">
+<div class="card sm-3 my-4" *ngIf="question">
+  <div class="row g-0 card-body">
     <div class="col-sm-8">
-      <div class="card-body">
+      <div >
         <p class="card-text">
           {{ question.content }}
         </p>
       </div>
     </div>
-    <div class="col-sm-2 py-3 pl-5 text-center">
-      <button class="btn h-100 btn-lg btn-primary">Answer</button>
+    <div class="col-sm-auto ms-auto text-center" *ngIf="isAnswering == false">
+      <button class="btn btn-lg btn-primary" (click)="isAnswering = true">Answer</button>
+    </div>
+    <div class="col-sm-auto ms-auto " *ngIf="isAnswering == true">
+      <button class="btn btn-lg btn-primary me-4" (click)="isAnswering = true">Send</button>
+    </div>
+    <div class="col-sm-auto my-auto" *ngIf="isAnswering == true">
+      <button class="btn btn-sm btn-danger" (click)="isAnswering = false; answer = ''">Cancel</button>
     </div>
   </div>
-  <div class="row">
-    <!-- input field -->
+  <div class="row g-0">
+    <div class="col-sm px-4 pb-3" *ngIf="isAnswering == true">
+      <textarea class="form-control" [(ngModel)]="answer" rows="3" maxlength="250"></textarea>
+    </div>
   </div>
 </div>

@@ -1,4 +1,16 @@
 
-#questionText {
+textarea {
     resize: none;
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        width: 80% !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        width: 90% !important;
+    }
 }

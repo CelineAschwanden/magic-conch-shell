@@ -1,4 +1,16 @@
 
+textarea {
+    resize: none;
+}
+
 .card {
     background-color: rgb(198, 198, 255);
+}
+
+.card-body {
+    padding: 1.5rem 1.5rem;
+}
+
+@media screen and (max-width: 575px) {
+    
 }

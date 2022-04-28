@@ -29,3 +29,20 @@
 .content-container {
     background-color: #c4defc;
 }
+
+@media screen and (min-width: 1200px) {
+    .content-container {
+        margin-left: 8rem;
+        margin-right: 8rem;
+    }
+    #clearing-button {
+        margin-right: 8rem;
+    }
+}
+
+@media screen and (min-width: 760px) {
+    .content-container {
+        padding-left: 3.5rem !important;
+        padding-right: 3.5rem !important;
+    }
+}

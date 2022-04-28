@@ -9,6 +9,8 @@ import { Question } from './question';
 export class QuestionCardComponent implements OnInit {
 
   @Input() question: Question | null = null;
+  answer: string = "";
+  isAnswering: boolean = false;
 
   constructor() { }
   ngOnInit(): void {
