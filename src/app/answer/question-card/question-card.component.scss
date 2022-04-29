@@ -7,10 +7,29 @@ textarea {
     background-color: rgb(198, 198, 255);
 }
 
-.card-body {
-    padding: 1.5rem 1.5rem;
-}
-
 @media screen and (max-width: 575px) {
-    
+    .textarea-mobile {
+        display: flex !important;
+
+        & > div > textarea {
+            height: 7em;
+        }
+    }
+    .textarea-desktop {
+        display: none;
+    }
+    #answer-button, #thumb-up-button, #thumb-down-button {
+        display: flex !important;
+        justify-content: center;
+        margin-top: 2em !important;
+    }
+    #send-button, #cancel-button, #thumb-up-button, #thumb-down-button {
+        width: auto;
+    }
+    #send-button, #thumb-down-button {
+        margin-right: auto;
+    }
+    #cancel-button, #thumb-up-button {
+        margin-left: auto;
+    }
 }

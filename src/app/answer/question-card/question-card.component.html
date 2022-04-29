@@ -1,24 +1,39 @@
 <div class="card sm-3 my-4" *ngIf="question">
-  <div class="row g-0 card-body">
-    <div class="col-sm-8">
+  <div class="row g-0 p-4 card-body">
+    <div class="col-sm-7">
       <div >
         <p class="card-text">
           {{ question.content }}
         </p>
       </div>
     </div>
-    <div class="col-sm-auto ms-auto text-center" *ngIf="isAnswering == false">
+
+    <div class="row g-0 d-none textarea-mobile" *ngIf="isAnswering == true">
+      <div class="col-sm py-4">
+        <textarea class="form-control" [(ngModel)]="answer" rows="3" maxlength="250"></textarea>
+      </div>
+    </div>
+
+    <div class="col-sm-auto ms-auto" id="thumb-up-button" *ngIf="isAnswering == false">
+      <button class="btn btn-lg btn-success" (click)="isAnswering = false"><i class="bi bi-hand-thumbs-up"></i></button>
+    </div>
+    <div class="col-sm-auto ms-3" id="thumb-down-button" *ngIf="isAnswering == false">
+      <button class="btn btn-lg btn-danger" (click)="isAnswering = false"><i class="bi bi-hand-thumbs-down"></i></button>
+    </div>
+    <div class="col-sm-auto ms-auto" id="answer-button" *ngIf="isAnswering == false">
       <button class="btn btn-lg btn-primary" (click)="isAnswering = true">Answer</button>
     </div>
-    <div class="col-sm-auto ms-auto " *ngIf="isAnswering == true">
-      <button class="btn btn-lg btn-primary me-4" (click)="isAnswering = true">Send</button>
+
+    <div class="col-sm-auto my-auto ms-auto" id="cancel-button" *ngIf="isAnswering == true">
+      <button class="btn btn-sm btn-danger me-4" (click)="isAnswering = false; answer = ''">Cancel</button>
     </div>
-    <div class="col-sm-auto my-auto" *ngIf="isAnswering == true">
-      <button class="btn btn-sm btn-danger" (click)="isAnswering = false; answer = ''">Cancel</button>
+    <div class="col-sm-auto" id="send-button" *ngIf="isAnswering == true">
+      <button class="btn btn-lg btn-primary" (click)="isAnswering = true">Send</button>
     </div>
   </div>
-  <div class="row g-0">
-    <div class="col-sm px-4 pb-3" *ngIf="isAnswering == true">
+
+  <div class="row g-0 textarea-desktop" *ngIf="isAnswering == true">
+    <div class="col-sm px-4 pb-3">
       <textarea class="form-control" [(ngModel)]="answer" rows="3" maxlength="250"></textarea>
     </div>
   </div>
