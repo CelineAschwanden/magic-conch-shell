@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Question } from './question-card/question';
-import { Firestore, collectionData, collection, DocumentData } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,12 +10,12 @@ import { Observable } from 'rxjs';
 })
 
 export class AnswerComponent implements OnInit {
-  questionList: Observable<DocumentData>;
+  questionList: Observable<Question[]>;
 
   constructor(firestore: Firestore) {
     const questions = collection(firestore, 'Question');
-    this.questionList = collectionData(questions);
-    console.log(this.questionList);
+
+    this.questionList = collectionData(questions, { idField: 'id'}) as Observable<Question[]>;
   }
 
   ngOnInit(): void {
