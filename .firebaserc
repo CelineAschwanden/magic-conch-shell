@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "magic-conch-shell-5a8c6": {
+      "hosting": {
+        "magic-conch-shell": [
+          "magic-conch-shell-5a8c6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "magic-conch-shell-5a8c6"
+  }
+}

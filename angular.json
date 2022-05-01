@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "magic-conch-shell:build:production",
+            "firebaseProject": "magic-conch-shell-5a8c6",
+            "firebaseHostingSite": "magic-conch-shell-5a8c6"
+          }
         }
       }
     }
