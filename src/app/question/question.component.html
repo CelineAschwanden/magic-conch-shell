@@ -6,10 +6,25 @@
 <div class="container text-center h-100 w-50 d-flex flex-column p-3 justify-content-center">
     <main>
         <img class="mb-5" width="180" src="assets/question_mark.png">
-        <div>
-            <textarea class="form-control mb-5" rows="5" maxlength="250"></textarea>
+        <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" *ngIf="sent == false && error == false">
+            <textarea class="form-control mb-5" rows="5" maxlength="250" formControlName="question"></textarea>
             <button type="submit" class="btn btn-primary btn-lg mb-3">Send</button>
+        </form>
+
+        <!-- Success card -->
+        <div class="card bg-success mb-5" *ngIf="sent == true">
+            <div class="card-body text-white">
+                <h5 class="card-title">Your question has been submitted!</h5>
+                <p class="card-text">You can create another one in 3 minutes.</p>
+            </div>
         </div>
+
+        <!-- Error card -->
+        <div class="card bg-danger mg" *ngIf="error == true">
+            <div class="card-body">
+                <h5 class="card-title">An error has occurred!</h5>
+                <p class="card-text">The question could not be sent.</p>
+            </div>
+        </div>        
     </main>
-    <footer></footer>
   </div>

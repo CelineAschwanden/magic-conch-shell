@@ -14,7 +14,6 @@ export class AnswerComponent implements OnInit {
 
   constructor(firestore: Firestore) {
     const questions = collection(firestore, 'Question');
-
     this.questionList = collectionData(questions, { idField: 'id'}) as Observable<Question[]>;
   }
 
