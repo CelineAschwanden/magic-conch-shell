@@ -1,0 +1,31 @@
+
+<div class="container text-center h-100 d-flex flex-column p-3 justify-content-center" id="main-container">
+    <main>
+        <img width="150" src="assets/conch_shell_logo.png">
+        <h1 class="mt-4">Login</h1>
+        <div class="row align-items-center mt-5">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="text-start">
+                    <label for="emailInput" class="form-label">Email address</label>
+                    <input type="email" id="emailInput" class="form-control" formControlName="email">
+
+                    <label for="passwordInput" class="form-label mt-3">Password</label>
+                    <input type="password" id="passwordInput" class="form-control" formControlName="password">
+                </div>
+
+                <button type="submit" class="col h-100 mt-5 btn btn-lg btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <!-- Error modal -->
+        <ng-template #errorModal let-modal>
+            <div class="modal-header bg-danger text-white">
+              <h3 class="modal-title" id="modal-basic-title">Error</h3>
+              <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body bg-danger text-white">
+                <p>Wrong email or password</p>
+            </div>
+          </ng-template>
+    </main>
+  </div>

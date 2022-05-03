@@ -18,7 +18,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     AppComponent,
     RoutingComponent,
     NotifCardComponent,
-    QuestionCardComponent
+    QuestionCardComponent,
   ],
   imports: [
     BrowserModule,
