@@ -1,8 +1,9 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { AuthService } from 'src/app/core/services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { signInWithEmailAndPassword, getAuth, Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,29 +13,41 @@ import { signInWithEmailAndPassword, getAuth, Auth } from '@angular/fire/auth';
 
 export class LoginComponent implements OnInit {
 
-  loginForm = this.formBuilder.group({email: '', password: ''});
   @ViewChild('errorModal') errorModal : TemplateRef<any> | any;
-  error = false;
+  errorMessage = "";
+
+  loginForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+  });
 
   constructor(
-    private router: Router,
-    private formBuilder: FormBuilder, 
-    private auth: Auth, 
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder,
+    private readonly auth: AuthService,
+    private readonly router: Router,
   ) { }
 
-  login(){
-    const firebaseAuth = getAuth(this.auth.app);
-    signInWithEmailAndPassword(firebaseAuth, this.loginForm.value.email, this.loginForm.value.password)
-      .then((userCredential) => {
-        this.router.navigateByUrl('/home');
-      })
-      .catch((error) => {
-        this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
-        console.log(error);
-      });
-  };
-
-  ngOnInit(): void {
+  get email() {
+    return this.loginForm.get('email');
   }
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  login() {
+    this.auth
+      .login(this.loginForm.value)
+      .then(() => this.router.navigate(['/home']))
+      .catch((e) => {
+        this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
+        if(e.message.includes("user-not-found" || e.message.includes("wrong-password")))
+          this.errorMessage = "Wrong email or password";
+        else
+          this.errorMessage = "An error occurred, could not login.";
+        console.log(e.message);
+      });
+  }
+
+  ngOnInit(): void {}
 }

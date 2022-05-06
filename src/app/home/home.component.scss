@@ -1,13 +1,18 @@
 
-.info-icon {
+#info-icon {
     font-size: 2.5rem;
     color: blue;
-    top: 3%;
-    right: 3%;
+    top: 1.5rem;
+    right: 8rem;
 
     &:hover {
         cursor: pointer;
     }
+}
+
+#logout-button {
+    top: 2.25rem;
+    right: 2rem;
 }
 
 #main-container {
