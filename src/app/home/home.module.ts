@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
+import { HomeRoutingModule, RoutingComponent } from './home-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QuestionCardComponent } from '../answer/question-card/question-card.component';
+import { NotifCardComponent } from '../notifications/notif-card/notif-card.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    RoutingComponent,
+    QuestionCardComponent,
+    NotifCardComponent,
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
   ]
 })
 export class HomeModule { }

@@ -1,19 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard'
 
-import { QuestionComponent } from './question/question.component';
-import { AnswerComponent } from './answer/answer.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { NotifCardComponent } from './notifications/notif-card/notif-card.component';
-import { QuestionCardComponent } from './answer/question-card/question-card.component';
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
-  { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
-  { path: 'home', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
-  { path: 'question', component:QuestionComponent },
-  { path: 'notifications', component:NotificationsComponent },
-  { path: 'answer', component:AnswerComponent },
+  { path: '', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule), ...canActivate(redirectLoggedInToHome) },
+  { path: 'home', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule), ...canActivate(redirectUnauthorizedToLogin) },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
@@ -23,4 +17,3 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule { }
-export const RoutingComponent = [QuestionComponent, AnswerComponent, NotificationsComponent, NotifCardComponent, QuestionCardComponent]

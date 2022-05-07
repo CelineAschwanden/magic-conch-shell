@@ -1,15 +1,21 @@
 
 <i id="info-icon" class="bi bi-info-square-fill position-fixed cursor-pointer" (click)="openInfo(content)"></i>
-<button id="logout-button" class="btn btn-danger position-fixed">Logout</button>
+<button id="logout-button" class="btn btn-danger position-fixed" (click)="logout()">Logout</button>
 
 <div class="container text-center h-100 d-flex flex-column p-3 justify-content-center" id="main-container">
   <main>
       <img width="150" src="assets/conch_shell_logo.png">
       <h1 class="mt-4">The Magic Conch Shell</h1>
       <div class="row align-items-center">          
-          <div class="col-sm h-100 pb-4"><button [routerLink]="['/question']" routerLinkActive="router-link-active"  class="btn h-100 btn-lg btn-primary">Create question</button></div>
-          <div class="col-sm h-100 pb-4"><button [routerLink]="['/notifications']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">Answers and Ratings</button></div>
-          <div class="col-sm h-100 pb-4"><button [routerLink]="['/answer']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">Answer Questions</button></div>
+          <div class="col-sm h-100 pb-4">
+            <button [routerLink]="['/home/question']" routerLinkActive="router-link-active"  class="btn h-100 btn-lg btn-primary">Create question</button>
+          </div>
+          <div class="col-sm h-100 pb-4">
+            <button [routerLink]="['/home/notifications']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">Notifications</button>
+          </div>
+          <div class="col-sm h-100 pb-4">
+            <button [routerLink]="['/home/answer']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">Answer Questions</button>
+          </div>
       </div>
   </main>
 </div>
@@ -22,8 +28,9 @@
   </div>
   <div class="modal-body">
       <h4>How it works</h4>
-      <p>After you've created a question, it gets assigned to some random users. They may only be created once in 3 minutes.<br>
-        Please write questions and answers in english.
+      <p>-After you've created a question, it gets assigned <br>to some random users. 
+        <br>-They may only be created once in 3 minutes.
+        <br>-Please write questions and answers in english.
       </p>
   </div>
 </ng-template>
