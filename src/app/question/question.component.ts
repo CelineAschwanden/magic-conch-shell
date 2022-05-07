@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Firestore, doc, collection, addDoc } from '@angular/fire/firestore';
 import { serverTimestamp } from '@firebase/firestore';
+
+import { AuthService } from '../core/services/auth.service';
+import { SubmitService } from '../core/services/submit.service';
 
 @Component({
   selector: 'app-question',
@@ -16,23 +18,26 @@ export class QuestionComponent {
   error = false;
 
   constructor(
-    private firestore: Firestore,
     private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private submitService: SubmitService,
   ) { }
 
   onSubmit(): void {
-    addDoc(
-      collection(this.firestore, 'Question'),
-      {content: this.questionForm.value.question, 
-        creation_date: serverTimestamp(), 
-        creatorID: doc(this.firestore, 'User/fr8pNiqVX4821Iht0T20')
+    this.submitService.createDoc({
+      collectionName: 'Question', 
+      data: {
+        content: this.questionForm.value.question,
+        creation_date: serverTimestamp(),
+        creatorID: this.authService.getUser()?.uid,
       }
-    ).then((data) => {
+    })
+    .then((data) => {
       this.sent = true;
     })
-    .catch((errorReason) => {
+    .catch((e) => {
       this.error = true;
-      console.error(errorReason);
+      console.error(e.message);
     });
 
     this.questionForm.reset();

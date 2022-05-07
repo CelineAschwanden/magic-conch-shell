@@ -7,7 +7,6 @@ import { LoginData } from '../interfaces/login-data.interface';
 })
 
 export class AuthService {
-
   constructor(private auth: Auth) { }
 
   login({ email, password }: LoginData) {
@@ -20,5 +19,9 @@ export class AuthService {
 
   logout() {
     return signOut(this.auth);
+  }
+
+  getUser() {
+    return this.auth.currentUser;
   }
 }

@@ -9,39 +9,12 @@ import { Notification, Type } from './notif-card/notification';
 
 export class NotificationsComponent implements OnInit {
   
-  notifList: Notification[] = [
-    {
-      type: Type.answer,
-      content: 'This is an answer',
-      question: 'Lorem ipsum dolor sit amet'
-    },
-    {
-      type: Type.rating,
-      content: 'positive',
-      question: 'Lorem ipsum dolor sit amet 2'
-    },
-    {
-      type: Type.rating,
-      content: 'negative',
-      question: 'Lorem ipsum dolor sit amet'
-    },
-    {
-      type: Type.answer,
-      content: 'This is an answer',
-      question: 'Lorem ipsum dolor sit amet'
-    },
-    {
-      type: Type.rating,
-      content: 'positive',
-      question: 'Lorem ipsum dolor sit amet 2'
-    }
-  ];
+  notifList: Notification[] = [];
 
   clearNotifs() {
     this.notifList.length = 0;
   }
 
   constructor() { }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
