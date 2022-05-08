@@ -6,5 +6,5 @@ export enum Type {
 export interface Notification {
     type: Type;
     content: string;
-    question: string;
+    relatedTo: string;
 }

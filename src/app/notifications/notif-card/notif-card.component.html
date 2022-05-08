@@ -8,10 +8,10 @@
       <div class="col-sm-8">
         <div class="card-body">
           <p class="card-text" *ngIf="notification.type === Type.answer">
-            You have received an answer for the following question: "{{ notification.question }}"<br><br>{{ notification.content }}
+            You have received an answer for the following question: "{{ notification.relatedTo }}"<br><br>{{ notification.content }}
           </p>
           <p class="card-text" *ngIf="notification.type === Type.rating">
-            Your question "{{ notification.question }}"<br>
+            Your question "{{ notification.relatedTo }}"<br>
             got a thumb <span *ngIf="notification.content == 'positive'; else negative">up</span><ng-template #negative>down</ng-template>
           </p>
         </div>

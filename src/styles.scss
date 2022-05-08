@@ -30,6 +30,13 @@
     background-color: #c4defc;
 }
 
+@media screen and (min-width: 760px) {
+    .content-container {
+        padding-left: 3.5rem !important;
+        padding-right: 3.5rem !important;
+    }
+}
+
 @media screen and (min-width: 1200px) {
     .content-container {
         margin-left: 8rem;
@@ -40,9 +47,22 @@
     }
 }
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 1500px) {
     .content-container {
-        padding-left: 3.5rem !important;
-        padding-right: 3.5rem !important;
+        margin-left: 15rem;
+        margin-right: 15rem;
+    }
+    #clearing-button {
+        margin-right: 15rem;
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .content-container {
+        margin-left: 20rem;
+        margin-right: 20rem;
+    }
+    #clearing-button {
+        margin-right: 20rem;
     }
 }

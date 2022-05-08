@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { serverTimestamp } from '@firebase/firestore';
+import { serverTimestamp } from '@angular/fire/firestore';
 
 import { AuthService } from '../core/services/auth.service';
 import { SubmitService } from '../core/services/submit.service';
