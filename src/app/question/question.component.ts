@@ -28,8 +28,8 @@ export class QuestionComponent {
       collectionName: 'Question', 
       data: {
         content: this.questionForm.value.question,
-        creation_date: serverTimestamp(),
-        creatorID: this.authService.getUser()?.uid,
+        timestamp: serverTimestamp(),
+        userID: this.authService.getUser()?.uid,
       }
     })
     .then((data) => {

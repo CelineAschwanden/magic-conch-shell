@@ -19,12 +19,11 @@ export class AnswerComponent implements OnInit {
   questionList: Observable<Question[]>;
 
   constructor(firestore: Firestore, private auth: AuthService, private submitService: SubmitService) {
-    const q = query(collection(firestore, 'Question'), where('userID', '==', this.auth.getUser()?.uid));
+    const q = query(collection(firestore, 'Question'), where('userID', '!=', this.auth.getUser()?.uid));
     this.questionList = collectionData(q, { idField: 'id'}) as Observable<Question[]>;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submit($event: submitInfo) {
     if($event.type == infoType.answer) {
@@ -34,7 +33,7 @@ export class AnswerComponent implements OnInit {
           content: $event.content,
           questionID: $event.questionID,
           userID: this.auth.getUser()?.uid,
-          creation_date: serverTimestamp(),
+          timestamp: serverTimestamp(),
         }
       })
       .then((data) => {
