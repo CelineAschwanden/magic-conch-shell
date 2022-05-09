@@ -7,7 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "electron-forge start",
-    "build": "ng build --base-href ./ && tsc --lib ES2018,DOM --target ES5 src-backend/main.ts --outDir dist",
+    "build": "ng build --base-href ./ && ngc --lib ES2020,DOM --target ES6 src-backend/main.ts --outDir dist",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "package": "electron-forge package",
@@ -46,7 +46,7 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
-    "electron": "^18.0.3",
+    "electron": "^18.2.0",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

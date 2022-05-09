@@ -19,7 +19,7 @@ function createWindow(){
         show: false
     });
     mainWindow.removeMenu();
-    mainWindow.loadURL('http://localhost:4200/');
+    mainWindow.loadFile(path.join(__dirname, "../dist/magic-conch-shell/index.html"));
 
     mainWindow.once('ready-to-show', () => {
         mainWindow.show()

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Firestore, collectionData, collection, serverTimestamp } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+import { Firestore, collection, query, where, getDocs, serverTimestamp, collectionData } from '@angular/fire/firestore';
 
 import { Question } from './question-card/question';
 import { infoType, submitInfo } from './question-card/submitInfo';
@@ -18,11 +19,12 @@ export class AnswerComponent implements OnInit {
   questionList: Observable<Question[]>;
 
   constructor(firestore: Firestore, private auth: AuthService, private submitService: SubmitService) {
-    const questions = collection(firestore, 'Question');
-    this.questionList = collectionData(questions, { idField: 'id'}) as Observable<Question[]>;
+    const q = query(collection(firestore, 'Question'), where('userID', '==', this.auth.getUser()?.uid));
+    this.questionList = collectionData(q, { idField: 'id'}) as Observable<Question[]>;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   submit($event: submitInfo) {
     if($event.type == infoType.answer) {
@@ -31,12 +33,15 @@ export class AnswerComponent implements OnInit {
         data: {
           content: $event.content,
           questionID: $event.questionID,
-          creatorID: this.auth.getUser()?.uid,
+          userID: this.auth.getUser()?.uid,
           creation_date: serverTimestamp(),
         }
       })
       .then((data) => {
-        //recreate questionList with modified Question? (set to null or rated=true)
+        //Remove answered question from list
+        this.questionList = this.questionList.pipe(map(questions => {
+          return questions.filter(question => question.id !== $event.questionID)
+        }))
       })
       .catch((e) => {
         console.error(e.message);
@@ -50,6 +55,10 @@ export class AnswerComponent implements OnInit {
           userID: this.auth.getUser()?.uid,
           value: $event.content
         }
+      })
+      .then((data) => {
+        //recreate list with question set to rated
+        //let question = this.questionList.pipe(map((questions: Question[]) => questions.find((q: Question) => q.id == $event.questionID)));
       })
       .catch((e) => {
         console.error(e.message);
