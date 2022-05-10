@@ -19,23 +19,27 @@ export class QuestionComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private submitService: SubmitService,
+    private auth: AuthService,
+    private submit: SubmitService,
   ) { }
 
   onSubmit(): void {
-    this.submitService.createDoc({
-      collectionName: 'Question', 
+    this.submit.createDoc({
+      collectionName: 'Questions', 
       data: {
         content: this.questionForm.value.question,
         timestamp: serverTimestamp(),
-        userID: this.authService.getUser()?.uid,
+        userID: this.auth.getUser()?.uid,
       }
     })
     .then((data) => {
+      this.submit.setEntryTimestamp(this.auth.getUser()!.uid); //move to backend
       this.sent = true;
     })
     .catch((e) => {
+      if(this.submit.getEntryTimestamp(this.auth.getUser()!.uid) != null) {
+        console.log(this.submit.getEntryTimestamp(this.auth.getUser()!.uid));
+      }
       this.error = true;
       console.error(e.message);
     });

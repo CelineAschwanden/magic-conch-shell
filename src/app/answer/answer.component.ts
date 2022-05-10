@@ -19,7 +19,7 @@ export class AnswerComponent implements OnInit {
   questionList: Observable<Question[]>;
 
   constructor(firestore: Firestore, private auth: AuthService, private submitService: SubmitService) {
-    const q = query(collection(firestore, 'Question'), where('userID', '!=', this.auth.getUser()?.uid));
+    const q = query(collection(firestore, 'Questions'), where('userID', '!=', this.auth.getUser()?.uid));
     this.questionList = collectionData(q, { idField: 'id'}) as Observable<Question[]>;
   }
 
@@ -28,7 +28,7 @@ export class AnswerComponent implements OnInit {
   submit($event: submitInfo) {
     if($event.type == infoType.answer) {
       this.submitService.createDoc({
-        collectionName: 'Answer',
+        collectionName: 'Answers',
         data: {
           content: $event.content,
           questionID: $event.questionID,
@@ -48,7 +48,7 @@ export class AnswerComponent implements OnInit {
     }
     else {
       this.submitService.createDoc({
-        collectionName: 'RatingQuestion',
+        collectionName: 'QuestionRatings',
         data: {
           questionID: $event.questionID,
           userID: this.auth.getUser()?.uid,

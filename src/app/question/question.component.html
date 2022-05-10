@@ -23,7 +23,8 @@
         <div class="card bg-danger mg" *ngIf="error == true">
             <div class="card-body">
                 <h5 class="card-title">An error has occurred!</h5>
-                <p class="card-text">The question could not be sent.</p>
+                <p class="card-text">The question could not be submitted.</p>
+                <button id="retry-button" class="btn mt-2" (click)="error = false">Retry</button>
             </div>
         </div>        
     </main>
