@@ -16,6 +16,7 @@ export class QuestionComponent {
   questionForm = this.formBuilder.group({question: ''});
   sent = false;
   error = false;
+  restrictionTime = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,6 +25,7 @@ export class QuestionComponent {
   ) { }
 
   onSubmit(): void {
+    //Create question document
     this.submit.createDoc({
       collectionName: 'Questions', 
       data: {
@@ -33,13 +35,20 @@ export class QuestionComponent {
       }
     })
     .then((data) => {
-      this.submit.setEntryTimestamp(this.auth.getUser()!.uid); //move to backend
+      //Set timestamp
+      this.submit.setEntryTimestamp(this.auth.getUser()!.uid); // todo: move to backend
       this.sent = true;
     })
     .catch((e) => {
-      if(this.submit.getEntryTimestamp(this.auth.getUser()!.uid) != null) {
-        console.log(this.submit.getEntryTimestamp(this.auth.getUser()!.uid));
-      }
+      //Check timestamp of last entry 
+      this.submit.getEntryTimestamp(this.auth.getUser()!.uid)
+        .then((entryTime) => {
+          if(entryTime != null && 180 > (Math.floor((Date.now() - entryTime!.getTime()) / 1000))) // todo: get limit from database
+            this.restrictionTime = 180 - (Math.floor((Date.now() - entryTime!.getTime()) / 1000));
+          else
+            this.restrictionTime = 0;
+        })
+
       this.error = true;
       console.error(e.message);
     });
