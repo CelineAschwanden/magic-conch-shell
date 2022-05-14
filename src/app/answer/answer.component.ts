@@ -7,7 +7,7 @@ import { Question } from './question-card/question';
 import { infoType, submitInfo } from './question-card/submitInfo';
 
 import { AuthService } from '../core/services/auth.service';
-import { SubmitService } from '../core/services/submit.service';
+import { StoreService } from '../core/services/store.service';
 
 @Component({
   selector: 'app-answer',
@@ -18,7 +18,8 @@ import { SubmitService } from '../core/services/submit.service';
 export class AnswerComponent implements OnInit {
   questionList: Observable<Question[]>;
 
-  constructor(firestore: Firestore, private auth: AuthService, private submitService: SubmitService) {
+  constructor(firestore: Firestore, private auth: AuthService, private store: StoreService) {
+    //Gets all existing questions from other users
     const q = query(collection(firestore, 'Questions'), where('userID', '!=', this.auth.getUser()?.uid));
     this.questionList = collectionData(q, { idField: 'id'}) as Observable<Question[]>;
   }
@@ -26,8 +27,9 @@ export class AnswerComponent implements OnInit {
   ngOnInit(): void {}
 
   submit($event: submitInfo) {
+    //Create answer document
     if($event.type == infoType.answer) {
-      this.submitService.createDoc({
+      this.store.createDoc({
         collectionName: 'Answers',
         data: {
           content: $event.content,
@@ -40,14 +42,15 @@ export class AnswerComponent implements OnInit {
         //Remove answered question from list
         this.questionList = this.questionList.pipe(map(questions => {
           return questions.filter(question => question.id !== $event.questionID)
-        }))
+        }));
       })
       .catch((e) => {
         console.error(e.message);
       });
     }
     else {
-      this.submitService.createDoc({
+      //Create rating document
+      this.store.createDoc({
         collectionName: 'QuestionRatings',
         data: {
           questionID: $event.questionID,
@@ -57,7 +60,11 @@ export class AnswerComponent implements OnInit {
       })
       .then((data) => {
         //recreate list with question set to rated
-        //let question = this.questionList.pipe(map((questions: Question[]) => questions.find((q: Question) => q.id == $event.questionID)));
+        this.questionList = this.questionList.pipe(map(questions => {
+          const index = questions.findIndex(q => q.id == $event.questionID);
+          questions[index].rated = true;
+          return questions;
+        }));
       })
       .catch((e) => {
         console.error(e.message);

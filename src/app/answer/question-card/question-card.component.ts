@@ -21,16 +21,11 @@ export class QuestionCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.question!.rated = false;
+    this.question!.rated = this.question!.rated ?? false;
   }
 
   onSubmit(type: infoType, value: string) {
     const info: submitInfo = {questionID: this.question!.id, content: value, type: type};
     this.submitEvent.emit(info);
-
-    if(type == infoType.answer)
-      this.question = null;
-    else if(type == infoType.rating)
-      this.question!.rated = true;
   }
 }
