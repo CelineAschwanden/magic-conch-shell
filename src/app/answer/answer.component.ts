@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { observable, Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { serverTimestamp } from '@angular/fire/firestore';
 
@@ -16,19 +16,20 @@ import { StoreService } from '../core/services/store.service';
 })
 
 export class AnswerComponent implements OnInit {
-  questionList: Observable<Question[]> = new Observable<Question[]>();
+  questionList: Observable<Question[]>;
 
   constructor(private auth: AuthService, private store: StoreService) {
-    const assignmentQuery = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
-    store.getQuerySnapshot(assignmentQuery).then((snapshot) => {
-      this.questionList = this.questionList.pipe(map(questions => {
-        snapshot.docs.forEach(assignment => {
-          const oq = store.getDocData('/Questions/' + assignment.data()['questionID'], 'questionID') as Observable<Question>;
-          const q = oq.pipe(map(question => {questions = [...questions, question];}));
-         });
-        return questions;
-      }));
+    const query = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
+    let questions: Question[] = [];
+
+    store.getQuerySnapshot(query).then((snapshot) => {
+      snapshot.docs.forEach(assignment => {
+        store.getDocSnapshot('/Questions/' + assignment.data()['questionID'])
+          //.then(doc => { questions = [...questions, doc.data() as Question] });
+      });
     });
+
+    this.questionList = from([questions]);
   }
 
   ngOnInit(): void {}
@@ -47,7 +48,7 @@ export class AnswerComponent implements OnInit {
       )
       .then((data) => {
         //Remove answered question from list
-        this.questionList = this.questionList.pipe(map(questions => {
+        this.questionList = this.questionList!.pipe(map(questions => {
           return questions.filter(question => question.id !== $event.questionID)
         }));
       })
@@ -67,7 +68,7 @@ export class AnswerComponent implements OnInit {
       )
       .then((data) => {
         //recreate list with question set to rated
-        this.questionList = this.questionList.pipe(map(questions => {
+        this.questionList = this.questionList!.pipe(map(questions => {
           const index = questions.findIndex(q => q.id == $event.questionID);
           questions[index].rated = true;
           return questions;
