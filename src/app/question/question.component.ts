@@ -26,14 +26,14 @@ export class QuestionComponent {
 
   onSubmit(): void {
     //Create question document
-    this.store.createDoc({
-      collectionName: 'Questions', 
-      data: {
+    this.store.submitData(
+      'Questions', 
+      {
         content: this.questionForm.value.question,
         timestamp: serverTimestamp(),
         userID: this.auth.getUser()?.uid,
       }
-    })
+    )
     .then((data) => {
       //Set timestamp
       this.store.setEntryTimestamp(this.auth.getUser()!.uid); // todo: move to backend

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { observable, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, collection, query, where, getDocs, serverTimestamp, collectionData } from '@angular/fire/firestore';
+import { serverTimestamp } from '@angular/fire/firestore';
 
 import { Question } from './question-card/question';
 import { infoType, submitInfo } from './question-card/submitInfo';
@@ -16,12 +16,19 @@ import { StoreService } from '../core/services/store.service';
 })
 
 export class AnswerComponent implements OnInit {
-  questionList: Observable<Question[]>;
+  questionList: Observable<Question[]> = new Observable<Question[]>();
 
-  constructor(firestore: Firestore, private auth: AuthService, private store: StoreService) {
-    //Gets all existing questions from other users
-    const q = query(collection(firestore, 'Questions'), where('userID', '!=', this.auth.getUser()?.uid));
-    this.questionList = collectionData(q, { idField: 'id'}) as Observable<Question[]>;
+  constructor(private auth: AuthService, private store: StoreService) {
+    const assignmentQuery = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
+    store.getQuerySnapshot(assignmentQuery).then((snapshot) => {
+      this.questionList = this.questionList.pipe(map(questions => {
+        snapshot.docs.forEach(assignment => {
+          const oq = store.getDocData('/Questions/' + assignment.data()['questionID'], 'questionID') as Observable<Question>;
+          const q = oq.pipe(map(question => {questions = [...questions, question];}));
+         });
+        return questions;
+      }));
+    });
   }
 
   ngOnInit(): void {}
@@ -29,15 +36,15 @@ export class AnswerComponent implements OnInit {
   submit($event: submitInfo) {
     //Create answer document
     if($event.type == infoType.answer) {
-      this.store.createDoc({
-        collectionName: 'Answers',
-        data: {
+      this.store.submitData(
+        'Answers',
+        {
           content: $event.content,
           questionID: $event.questionID,
           userID: this.auth.getUser()?.uid,
           timestamp: serverTimestamp(),
         }
-      })
+      )
       .then((data) => {
         //Remove answered question from list
         this.questionList = this.questionList.pipe(map(questions => {
@@ -50,14 +57,14 @@ export class AnswerComponent implements OnInit {
     }
     else {
       //Create rating document
-      this.store.createDoc({
-        collectionName: 'QuestionRatings',
-        data: {
+      this.store.submitData(
+        'QuestionRatings',
+        {
           questionID: $event.questionID,
           userID: this.auth.getUser()?.uid,
           value: $event.content
         }
-      })
+      )
       .then((data) => {
         //recreate list with question set to rated
         this.questionList = this.questionList.pipe(map(questions => {
