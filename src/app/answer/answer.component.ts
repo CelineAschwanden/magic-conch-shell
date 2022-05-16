@@ -22,13 +22,20 @@ export class AnswerComponent implements OnInit {
     const query = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
     let questions: Question[] = [];
 
+    //Get assigned questions and push into question list
     store.getQuerySnapshot(query).then((snapshot) => {
       snapshot.docs.forEach(assignment => {
-        store.getDocSnapshot('/Questions/' + assignment.data()['questionID'])
-          //.then(doc => { questions = [...questions, doc.data() as Question] });
+        store.getDocSnapshot('Questions/', assignment.get('questionID').trim())
+          .then(doc => { questions.push({
+              id: doc.id,
+              content: doc.get('content'),
+              rated: assignment.get('rated'),
+            })
+          });
       });
     });
 
+    console.log();
     this.questionList = from([questions]);
   }
 
@@ -47,7 +54,9 @@ export class AnswerComponent implements OnInit {
         }
       )
       .then((data) => {
-        //Remove answered question from list
+        //Remove assignment
+
+        //Then remove answered question from list
         this.questionList = this.questionList!.pipe(map(questions => {
           return questions.filter(question => question.id !== $event.questionID)
         }));
@@ -67,7 +76,9 @@ export class AnswerComponent implements OnInit {
         }
       )
       .then((data) => {
-        //recreate list with question set to rated
+        //Set to rated in assignment
+
+        //Then ecreate list with question set to rated
         this.questionList = this.questionList!.pipe(map(questions => {
           const index = questions.findIndex(q => q.id == $event.questionID);
           questions[index].rated = true;

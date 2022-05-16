@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, query, where, collection, doc, addDoc, setDoc, 
-  getDoc, serverTimestamp, WhereFilterOp, Query, DocumentData, collectionData, getDocs, QuerySnapshot, DocumentReference, DocumentSnapshot, docData } from '@angular/fire/firestore';
+  getDoc, serverTimestamp, WhereFilterOp, Query, DocumentData, collectionData, 
+  getDocs, QuerySnapshot, DocumentSnapshot, docData, docSnapshots } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,8 +21,12 @@ export class StoreService {
     );
   }
   
-  getDocSnapshot(path: string): Promise<DocumentSnapshot<DocumentData>> {
-    return getDoc(doc(this.firestore, path));
+  getDocSnapshot(path: string, segment: string): Promise<DocumentSnapshot<DocumentData>> {
+    return getDoc(doc(this.firestore, path, segment));
+  }
+
+  getDocSnapshotChanges(path: string) {
+    return docSnapshots(doc(this.firestore, path));
   }
 
   getQuerySnapshot(query: Query<DocumentData>): Promise<QuerySnapshot<DocumentData>> {
