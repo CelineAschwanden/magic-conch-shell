@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Firestore, query, where, collection, doc, addDoc, setDoc, 
   getDoc, serverTimestamp, WhereFilterOp, Query, DocumentData, collectionData, 
-  getDocs, QuerySnapshot, DocumentSnapshot, docData, docSnapshots } from '@angular/fire/firestore';
+  QuerySnapshot, DocumentSnapshot, docData, docSnapshots, getDocsFromServer, updateDoc } from '@angular/fire/firestore';
+import { deleteDoc } from '@firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,6 +14,14 @@ export class StoreService {
 
   submitData(collectionName: string, data: any) {
     return addDoc(collection(this.firestore, collectionName), data);
+  }
+
+  updateData(path: string, data: object): Promise<void> {
+    return updateDoc(doc(this.firestore, path), data);
+  }
+
+  deleteData(path: string) {
+    return deleteDoc(doc(this.firestore, path));
   }
 
   dataQuery(collectionName: string, fieldPath: string, operator: WhereFilterOp, value: any): Query<DocumentData> {
@@ -30,7 +39,7 @@ export class StoreService {
   }
 
   getQuerySnapshot(query: Query<DocumentData>): Promise<QuerySnapshot<DocumentData>> {
-    return getDocs(query);
+    return getDocsFromServer(query);
   }
 
   getDocData(path: string, idField: string) {

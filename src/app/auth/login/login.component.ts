@@ -13,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class LoginComponent implements OnInit {
 
-  @ViewChild('errorModal') errorModal : TemplateRef<any> | any;
+  @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
   errorMessage = "";
 
   loginForm = this.formBuilder.group({
@@ -21,11 +21,8 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required],
   });
 
-  constructor(
-    private modalService: NgbModal,
-    private formBuilder: FormBuilder,
-    private readonly auth: AuthService,
-    private readonly router: Router,
+  constructor( private modalService: NgbModal, private formBuilder: FormBuilder,
+    private readonly auth: AuthService, private readonly router: Router,
   ) { }
 
   get email() {

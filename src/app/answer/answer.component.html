@@ -16,3 +16,14 @@
         </div>
     </div>
 </div>
+
+<!-- Error modal -->
+<ng-template #errorModal let-modal>
+    <div class="modal-header bg-danger text-white">
+        <h3 class="modal-title" id="modal-basic-title">An error ocurred!</h3>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body bg-danger text-white">
+        <p>The question could not be rated.</p>
+    </div>
+</ng-template>
