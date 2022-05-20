@@ -20,38 +20,39 @@ import { StoreService } from '../core/services/store.service';
 export class AnswerComponent implements OnInit {
   @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
   questionList: Observable<Question[]>;
-  assignments: Assignment[];
+  assignments: Observable<Assignment[]>;
 
   constructor(private auth: AuthService, private store: StoreService, private modalService: NgbModal) {
     const query = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
     let questions: Question[] = [];
-    let assignments: Assignment[] = [];
 
     //Save assignments and questions into lists
-    store.getQuerySnapshot(query).then((snapshot) => {
-      snapshot.docs.forEach(assignment => {
-        this.assignments.push({
-          id: assignment.id,
-          questionID: assignment.get('questionID').trim(), 
-          rated: assignment.get('rated')
-        });
-        store.getDocSnapshot('Questions/', assignment.get('questionID').trim())
-          .then(doc => { questions.push({
-              id: doc.id,
-              content: doc.get('content'),
-              rated: assignment.get('rated'),
-            })
-          });
-      });
-    });
+    this.assignments = store.getCollectionData(query, 'id') as Observable<Assignment[]>;
 
-    this.assignments = assignments;
+    this.assignments.pipe(map(assigs => {
+      assigs.forEach(assignment => {
+        store.getDocSnapshot('Questions/', assignment.questionID.trim())
+        .then(doc => { 
+          questions.push({
+            id: doc.id,
+            content: doc.get('content'),
+            rated: assignment.rated,
+          })
+          console.log(doc.data());
+        })
+        .catch((e) => console.log(e.message));
+      });
+    }));
+
     this.questionList = from([questions]);
   }
 
   ngOnInit(): void {}
 
   submit($event: submitInfo) {
+    let assigID: string;
+    this.assignments.subscribe(assig => assigID = assig.find(a => a.questionID == $event.questionID)!.id);
+
     //Create answer document
     if($event.type == infoType.answer) {
       this.store.submitData(
@@ -65,15 +66,21 @@ export class AnswerComponent implements OnInit {
       )
       .then((data) => {
         //Delete assignment
-        //this.store.deleteData('QuestionAssignments/' + );
-        
-        //Then remove answered question from list
-        this.questionList = this.questionList.pipe(map(questions => {
-          return questions.filter(question => question.id !== $event.questionID)
-        }));
+        this.store.deleteData('QuestionAssignments/' + assigID)
+          .then((data) => {
+            //Then remove answered question from list
+            this.questionList = this.questionList.pipe(map(questions => {
+              return questions.filter(question => question.id !== $event.questionID)
+            }));
+          })
+          .catch((e) => {
+            this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
+            console.log(e.message);
+          });
       })
-      .catch((e) => {
-        console.error(e.message);
+      .catch(e => {
+        this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
+        console.error(e.message)
       });
     }
     else {
@@ -88,8 +95,7 @@ export class AnswerComponent implements OnInit {
       )
       .then((data) => {
         //Set rated in assignment
-        const asigID = this.assignments.find((a) => {return a.questionID == $event.questionID})?.id;
-        this.store.updateData('QuestionAssignments/' + asigID, {rated: true})
+        this.store.updateData('QuestionAssignments/' + assigID, {rated: true})
           .then(() => {
             //Recreate list with question set to rated
             this.questionList = this.questionList.pipe(map(questions => {
