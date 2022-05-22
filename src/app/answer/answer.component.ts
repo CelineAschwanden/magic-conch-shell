@@ -1,10 +1,9 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { serverTimestamp } from '@angular/fire/firestore';
+import { documentId, serverTimestamp } from '@angular/fire/firestore';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Question } from './question-card/question';
 import { Assignment } from './assignment';
 import { infoType, submitInfo } from './question-card/submitInfo';
 
@@ -19,32 +18,11 @@ import { StoreService } from '../core/services/store.service';
 
 export class AnswerComponent implements OnInit {
   @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
-  questionList: Observable<Question[]>;
   assignments: Observable<Assignment[]>;
 
   constructor(private auth: AuthService, private store: StoreService, private modalService: NgbModal) {
-    const query = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
-    let questions: Question[] = [];
-
-    //Save assignments and questions into lists
-    this.assignments = store.getCollectionData(query, 'id') as Observable<Assignment[]>;
-
-    this.assignments.pipe(map(assigs => {
-      assigs.forEach(assignment => {
-        store.getDocSnapshot('Questions/', assignment.questionID.trim())
-        .then(doc => { 
-          questions.push({
-            id: doc.id,
-            content: doc.get('content'),
-            rated: assignment.rated,
-          })
-          console.log(doc.data());
-        })
-        .catch((e) => console.log(e.message));
-      });
-    }));
-
-    this.questionList = from([questions]);
+    const assigQuery = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
+    this.assignments = store.getCollectionData(assigQuery, 'id') as Observable<Assignment[]>
   }
 
   ngOnInit(): void {}
@@ -67,12 +45,6 @@ export class AnswerComponent implements OnInit {
       .then((data) => {
         //Delete assignment
         this.store.deleteData('QuestionAssignments/' + assigID)
-          .then((data) => {
-            //Then remove answered question from list
-            this.questionList = this.questionList.pipe(map(questions => {
-              return questions.filter(question => question.id !== $event.questionID)
-            }));
-          })
           .catch((e) => {
             this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
             console.log(e.message);
@@ -96,14 +68,6 @@ export class AnswerComponent implements OnInit {
       .then((data) => {
         //Set rated in assignment
         this.store.updateData('QuestionAssignments/' + assigID, {rated: true})
-          .then(() => {
-            //Recreate list with question set to rated
-            this.questionList = this.questionList.pipe(map(questions => {
-              const index = questions.findIndex(q => q.id == $event.questionID);
-              questions[index].rated = true;
-              return questions;
-            }));
-          })
           .catch((e) => {
             this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
             console.log(e.message)
