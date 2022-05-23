@@ -11,8 +11,9 @@
     </div>
 
     <div class="h-85 px-5 pb-5 pt-4 content-frame">
-        <div class=" h-100 border border-dark px-4 py-3 content-container overflow-auto">
+        <div class="d-flex flex-column h-100 border border-dark px-4 py-3 content-container overflow-auto">
             <app-question-card *ngFor="let assignment of assignments | async" [assignment]="assignment" (submitEvent)="submit($event)"></app-question-card>
+            <div class="align-self-center my-auto text-center"><h3 *ngIf="empty == true">There are currently no questions available for you.</h3></div>
         </div>
     </div>
 </div>

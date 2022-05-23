@@ -2,3 +2,14 @@
 #notification-icon {
     margin-right: 27%;
 }
+
+@media screen and (max-width: 500px){
+    #clearing-button {
+        position: fixed;
+        top: 1.7rem;
+        right: 1.7rem;
+    }
+    .icon-space {
+        width: 84%;
+    }
+}

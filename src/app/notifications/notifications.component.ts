@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Notification, Type } from './notif-card/notification';
+import { Observable } from 'rxjs';
+
+import { AuthService } from '../core/services/auth.service';
+import { StoreService } from '../core/services/store.service';
+import { Notification } from './notif-card/notification';
 
 @Component({
   selector: 'app-notifications',
@@ -9,12 +13,19 @@ import { Notification, Type } from './notif-card/notification';
 
 export class NotificationsComponent implements OnInit {
   
-  notifList: Notification[] = [];
+  notifList: Observable<Notification[]>;
 
-  clearNotifs() {
-    this.notifList.length = 0;
+  constructor(private store: StoreService, private auth: AuthService) { 
+    this.notifList = store.getCollectionData(store.getCollectionRef('Messages/' + this.auth.getUser()?.uid + '/Notifications/'), 'id') as Observable<Notification[]>;
   }
 
-  constructor() { }
+  clearNotifs() {
+    this.notifList.subscribe(notifs => {
+      notifs.forEach(notif => {
+        this.store.deleteData('Messages/' + this.auth.getUser()?.uid + '/Notifications/' + notif.id);
+      });
+    });
+  }
+
   ngOnInit(): void {}
 }

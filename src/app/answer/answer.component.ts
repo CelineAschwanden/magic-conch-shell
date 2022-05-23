@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { documentId, serverTimestamp } from '@angular/fire/firestore';
+import { serverTimestamp } from '@angular/fire/firestore';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Assignment } from './assignment';
@@ -19,10 +18,12 @@ import { StoreService } from '../core/services/store.service';
 export class AnswerComponent implements OnInit {
   @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
   assignments: Observable<Assignment[]>;
+  empty: Boolean = false;
 
   constructor(private auth: AuthService, private store: StoreService, private modalService: NgbModal) {
     const assigQuery = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
     this.assignments = store.getCollectionData(assigQuery, 'id') as Observable<Assignment[]>
+    this.assignments.subscribe(assigs => { if(assigs.length == 0) this.empty = true; else this.empty = false; });
   }
 
   ngOnInit(): void {}

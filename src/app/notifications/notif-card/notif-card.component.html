@@ -1,18 +1,19 @@
-<div class="card sm-3 my-3" *ngIf="notification">
+<div class="card mt-3 mb-4" *ngIf="notification">
     <div class="row no-gutters py-2">
       <div class="col-sm-2 py-3 pl-5 text-center">
-        <i class="bi bi-chat-dots" *ngIf="notification.type === Type.answer"></i>
-        <i class="bi bi-hand-thumbs-up" *ngIf="notification.type === Type.rating && notification.content == 'positive'"></i>
-        <i class="bi bi-hand-thumbs-down" *ngIf="notification.type === Type.rating && notification.content == 'negative'"></i>
+        <i class="bi bi-chat-dots" *ngIf="notifType === Type.answer"></i>
+        <i class="bi bi-hand-thumbs-up" *ngIf="(notifType === Type.questionRating || notifType === Type.answerRating) && content == 'up'"></i>
+        <i class="bi bi-hand-thumbs-down" *ngIf="(notifType === Type.questionRating || notifType === Type.answerRating) && content == 'down'"></i>
       </div>
       <div class="col-sm-8">
         <div class="card-body">
-          <p class="card-text" *ngIf="notification.type === Type.answer">
-            You have received an answer for the following question: "{{ notification.relatedTo }}"<br><br>{{ notification.content }}
+          <p class="card-text" *ngIf="notifType === Type.answer">
+            You have received an answer for the following question:<br>"{{ relatedTo }}"<br><br>
+            {{ content }}
           </p>
-          <p class="card-text" *ngIf="notification.type === Type.rating">
-            Your question "{{ notification.relatedTo }}"<br>
-            got a thumb <span *ngIf="notification.content == 'positive'; else negative">up</span><ng-template #negative>down</ng-template>
+          <p class="card-text" *ngIf="notifType === Type.questionRating || notifType === Type.answerRating">
+            Your <span *ngIf="notifType === Type.questionRating; else answerRating">question</span><ng-template #answerRating>answer</ng-template> 
+            "{{ relatedTo }}"<br> got a thumb {{ content }}!
           </p>
         </div>
       </div>

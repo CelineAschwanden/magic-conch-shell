@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, query, where, collection, doc, addDoc, setDoc, 
   getDoc, serverTimestamp, WhereFilterOp, Query, DocumentData, collectionData, 
-  QuerySnapshot, DocumentSnapshot, docData, docSnapshots, getDocsFromServer, updateDoc, FieldPath } from '@angular/fire/firestore';
+  QuerySnapshot, DocumentSnapshot, docData, docSnapshots, getDocsFromServer, updateDoc, FieldPath, CollectionReference } from '@angular/fire/firestore';
 import { deleteDoc } from '@firebase/firestore';
 import { Observable } from 'rxjs';
 
@@ -46,7 +46,11 @@ export class StoreService {
     return docData(doc(this.firestore, path), {idField: idField});
   }
 
-  getCollectionData(query: Query<DocumentData>, idField: string): Observable<DocumentData[]> {
+  getCollectionRef(path: string): CollectionReference<DocumentData> {
+    return collection(this.firestore, path);
+  }
+
+  getCollectionData(query: Query<DocumentData> | CollectionReference<DocumentData>, idField: string): Observable<DocumentData[]> {
     return collectionData(query, {idField: idField});
   }
 
