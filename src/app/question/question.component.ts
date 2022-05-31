@@ -25,6 +25,14 @@ export class QuestionComponent {
   ) { }
 
   onSubmit(): void {
+    let limit: number = 0;
+    this.store.getDocSnapshot('Settings/limits', '')
+      .then(limits => limit = limits.get('questionLimit'))
+      .catch(e => { 
+        this.error = true; 
+        console.error(e.message) 
+      });
+
     //Create question document
     this.store.submitData(
       'Questions', 
@@ -35,16 +43,14 @@ export class QuestionComponent {
       }
     )
     .then((data) => {
-      //Set timestamp
-      this.store.setEntryTimestamp(this.auth.getUser()!.uid); // todo: move to backend
       this.sent = true;
     })
     .catch((e) => {
       //Check timestamp of last entry 
       this.store.getEntryTimestamp(this.auth.getUser()!.uid)
         .then((entryTime) => {
-          if(entryTime != null && 180 > (Math.floor((Date.now() - entryTime!.getTime()) / 1000))) // todo: get limit from database
-            this.restrictionTime = 180 - (Math.floor((Date.now() - entryTime!.getTime()) / 1000));
+          if(entryTime != null && limit > (Math.floor((Date.now() - entryTime!.getTime()) / 1000)))
+            this.restrictionTime = limit - (Math.floor((Date.now() - entryTime!.getTime()) / 1000));
           else
             this.restrictionTime = 0;
         })

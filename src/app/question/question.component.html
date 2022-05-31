@@ -3,7 +3,7 @@
     <i class="bi bi-arrow-left-square-fill position-fixed back-arrow"></i>
 </a>
 
-<div class="container text-center h-100 w-50 d-flex flex-column p-3 justify-content-center">
+<div class="container text-center h-100 d-flex flex-column p-3 justify-content-center">
     <main>
         <img class="mb-5" width="150" src="assets/question_mark.png">
         <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" *ngIf="sent == false && error == false">

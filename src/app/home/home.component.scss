@@ -16,7 +16,7 @@
 }
 
 #main-container {
-    width: 65%;
+    width: 45%;
 }
 
 #main-container main {
@@ -27,16 +27,23 @@
     margin-top: 5rem;
 }
 
-@media (max-width: 1130px) {
+@media (max-width: 1650px) {
+    #main-container {
+        width: 48% !important;
+        max-width: 48% !important;
+    }
+}
+
+@media (max-width: 1375px) {
     #main-container .row {
         height: 110px;
     }
 }
 
-@media (max-width: 765px) {
+@media (max-width: 1000px) {
     #main-container {
-        width: 100% !important;
-        max-width: 90% !important;
+        width: 75% !important;
+        max-width: 75% !important;
     }
 }
 

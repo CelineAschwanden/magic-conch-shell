@@ -42,6 +42,8 @@ export class RegisterComponent implements OnInit {
         this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
         if(e.message.includes("weak-password"))
           this.errorMessage = "Password should be at least 6 characters!";
+        else if(e.message.includes("email-already-in-use"))
+          this.errorMessage = "This email has already been used!";
         else if(e.message.includes("invalid-email"))
           this.errorMessage = "Invalid email";
         else

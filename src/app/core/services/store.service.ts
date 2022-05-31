@@ -56,11 +56,11 @@ export class StoreService {
 
   getEntryTimestamp(userID: string): Promise<Date | null> {
     return getDoc(doc(this.firestore, '/Users/' + userID))
-      .then((doc) => { return doc.get("lastEntry").toDate() })
-      .catch((e) => { console.log(e.message); return null });
-  }
-
-  setEntryTimestamp(userID: string) {
-    return setDoc(doc(this.firestore, '/Users/' + userID), { lastEntry: serverTimestamp() })
+      .then((doc) => { 
+        if ( doc.get("lastEntry") != undefined )
+          return doc.get("lastEntry").toDate();
+        else
+          return null;
+      });
   }
 }

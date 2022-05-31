@@ -3,9 +3,19 @@ textarea {
     resize: none;
 }
 
+.container {
+    width: 35%;
+}
+
 #retry-button {
     background-color: #9e212e;
     color: white;
+}
+
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 50% !important;
+    }
 }
 
 @media screen and (max-width: 800px) {

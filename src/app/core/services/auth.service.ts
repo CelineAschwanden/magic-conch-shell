@@ -16,10 +16,7 @@ export class AuthService {
   }
   
   register({ email, password }: LoginData) {
-    return createUserWithEmailAndPassword(this.auth, email, password)
-      .then((credentials) => { 
-        setDoc(doc(this.firestore, '/Users/' + credentials.user.uid), { lastEntry: serverTimestamp() }) //move this to backend?
-      });
+    return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
   logout() {
