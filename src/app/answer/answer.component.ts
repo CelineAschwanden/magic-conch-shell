@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { serverTimestamp } from '@angular/fire/firestore';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -43,13 +43,11 @@ export class AnswerComponent implements OnInit {
           timestamp: serverTimestamp(),
         }
       )
-      .then((data) => {
-        //Delete assignment
-        this.store.deleteData('QuestionAssignments/' + assigID)
-          .catch((e) => {
-            this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
-            console.log(e.message);
-          });
+      .then(data => {
+        this.assignments = this.assignments.pipe(map(assigs => {
+          return assigs.filter(a => a.id != assigID);
+        }));
+        this.assignments.subscribe(assigs => { if(assigs.length == 0) this.empty = true; else this.empty = false; });
       })
       .catch(e => {
         this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
