@@ -16,13 +16,13 @@ export class NotificationsComponent implements OnInit {
   notifList: Observable<Notification[]>;
 
   constructor(private store: StoreService, private auth: AuthService) { 
-    this.notifList = store.getCollectionData(store.getCollectionRef('Messages/' + this.auth.getUser()?.uid + '/Notifications/'), 'id') as Observable<Notification[]>;
+    this.notifList = store.getCollectionData(store.getCollectionRef('Users/' + this.auth.getUser()?.uid + '/Notifications/'), 'id') as Observable<Notification[]>;
   }
 
   clearNotifs() {
     this.notifList.subscribe(notifs => {
       notifs.forEach(notif => {
-        this.store.deleteData('Messages/' + this.auth.getUser()?.uid + '/Notifications/' + notif.id);
+        this.store.deleteData('Users/' + this.auth.getUser()?.uid + '/Notifications/' + notif.id);
       });
     });
   }
