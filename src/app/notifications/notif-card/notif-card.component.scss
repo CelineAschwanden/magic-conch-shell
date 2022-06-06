@@ -1,8 +1,40 @@
 
-i {
+.card-icons i {
     font-size: 2.5em;
 }
 
 .card {
     background-color: lemonchiffon;
+}
+
+@media screen and (max-width: 1000px) {
+    .card-icons {
+        padding-left: 30px;
+        padding-right: 0px;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    #thumb-up-button {
+        padding-right: 0px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .card-icons {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    #thumb-up-button, #thumb-down-button {
+        display: flex !important;
+        justify-content: center;
+        margin-top: 2em !important;
+        width: auto;
+    }
+    #thumb-down-button {
+        margin-right: auto;
+    }
+    #thumb-up-button {
+        margin-left: auto;
+    }
 }

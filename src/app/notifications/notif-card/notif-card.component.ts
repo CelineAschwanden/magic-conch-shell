@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { StoreService } from 'src/app/core/services/store.service';
 import { Notification, Type } from './notification';
 
@@ -17,7 +18,7 @@ export class NotifCardComponent implements OnInit {
   content: string = "";
   relatedTo: string = "";
 
-  constructor(private store: StoreService) { }
+  constructor(private store: StoreService, private auth: AuthService) { }
 
   ngOnInit(): void {
     if (this.notification?.answerID.trim() != "") {
@@ -38,7 +39,7 @@ export class NotifCardComponent implements OnInit {
           else
             this.content = "down";
           
-          this.store.getDocSnapshot('Questions/', rating.get('questionID'))
+          this.store.getDocSnapshot('Questions/', rating.get('questionID').trim())
             .then(question => this.relatedTo = question.get('content'))
         });
     }
@@ -51,9 +52,27 @@ export class NotifCardComponent implements OnInit {
           else
             this.content = "down";
           
-          this.store.getDocSnapshot('Questions/', rating.get('questionID'))
+          this.store.getDocSnapshot('Questions/', rating.get('questionID').trim())
             .then(question => this.relatedTo = question.get('content'))
         });
     }
+  }
+
+  onRate(value: number) {
+    this.store.submitData(
+      'AnswerRatings',
+      {
+        answerID: this.notification?.answerID,
+        userID: this.auth.getUser()?.uid,
+        value: value
+      }
+    )
+    .then(data => {
+      this.store.updateData('Users/' + this.auth.getUser()?.uid + '/Notifications/' + this.notification?.id, {rated: true})
+      .catch((e) => {
+        //add modal here
+        console.log(e.message)
+      });
+    })
   }
 }

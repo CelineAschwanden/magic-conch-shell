@@ -65,7 +65,7 @@ export class AnswerComponent implements OnInit {
         }
       )
       .then((data) => {
-        //Set rated in assignment
+        //Set rated in assignment (move to backend)
         this.store.updateData('QuestionAssignments/' + assigID, {rated: true})
           .catch((e) => {
             this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
