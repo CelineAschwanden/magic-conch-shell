@@ -1,6 +1,6 @@
 
 #main-container {
-    width: 30%;
+    width: 20%;
 }
 
 #main-container main {
@@ -9,6 +9,17 @@
 
 #main-container .row {
     margin-top: 5rem;
+}
+
+#main-container i {
+    font-size: 125px;
+}
+
+@media (max-width: 1440px) {
+    #main-container {
+        width: 32% !important;
+        max-width: 32% !important;
+    }
 }
 
 @media (max-width: 765px) {

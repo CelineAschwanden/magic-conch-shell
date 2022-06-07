@@ -12,9 +12,6 @@
         padding-left: 30px;
         padding-right: 0px;
     }
-}
-
-@media screen and (max-width: 690px) {
     #thumb-up-button {
         padding-right: 0px;
     }
@@ -22,19 +19,13 @@
 
 @media screen and (max-width: 575px) {
     .card-icons {
-        padding-left: 12px;
-        padding-right: 12px;
+        padding: 0px 12px !important;
     }
     #thumb-up-button, #thumb-down-button {
         display: flex !important;
         justify-content: center;
-        margin-top: 2em !important;
+        margin-top: 0 !important;
+        padding-bottom: 5px !important;
         width: auto;
-    }
-    #thumb-down-button {
-        margin-right: auto;
-    }
-    #thumb-up-button {
-        margin-left: auto;
     }
 }

@@ -39,8 +39,9 @@ export class NotifCardComponent implements OnInit {
           else
             this.content = "down";
           
-          this.store.getDocSnapshot('Questions/', rating.get('questionID').trim())
-            .then(question => this.relatedTo = question.get('content'))
+          this.store.getDocSnapshot('Answers/', rating.get('answerID').trim())
+            .then(answer => this.relatedTo = answer.get('content'))
+            .catch(e => console.log(e.message))
         });
     }
     else if (this.notification.questionRatingID.trim() != "") {

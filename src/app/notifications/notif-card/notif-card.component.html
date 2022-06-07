@@ -1,5 +1,5 @@
 <div class="card mt-3 mb-4" *ngIf="notification">
-    <div class="row no-gutters py-2">
+    <div class="row no-gutters py-3">
 
       <div class="card-icons col-sm-2 py-3 pl-5 text-center">
         <i class="bi bi-chat-dots" *ngIf="notifType === Type.answer"></i>
@@ -9,10 +9,13 @@
 
       <div class="col-sm-7">
         <div class="card-body">
-          <p class="card-text" *ngIf="notifType === Type.answer">
-            You have received an answer for the following question:<br>"{{ relatedTo }}"<br><br>
-            {{ content }}
-          </p>
+          <div *ngIf="notifType === Type.answer">
+            <p class="card-text pb-3 border-bottom border-secondary">
+              You have received an answer for the following question:<br>"{{ relatedTo }}"
+            </p>
+            <p>{{ content }}</p>
+          </div>
+          
           <p class="card-text" *ngIf="notifType === Type.questionRating || notifType === Type.answerRating">
             Your <span *ngIf="notifType === Type.questionRating; else answerRating">question</span><ng-template #answerRating>answer</ng-template> 
             "{{ relatedTo }}"<br> got a thumb {{ content }}!
@@ -20,10 +23,10 @@
         </div>
       </div>
 
-      <div class="col-sm-auto py-4" id="thumb-up-button" *ngIf="notifType == Type.answer && notification.rated == false">
+      <div class="col-sm-auto py-4 ms-auto" id="thumb-up-button" *ngIf="notifType == Type.answer && notification.rated == false">
         <button class="btn btn-success" (click)="onRate(1)"><i class="bi bi-hand-thumbs-up"></i></button>
       </div>
-      <div class="col-sm-auto py-4" id="thumb-down-button" *ngIf="notifType == Type.answer && notification.rated == false">
+      <div class="col-sm-auto py-4 me-auto" id="thumb-down-button" *ngIf="notifType == Type.answer && notification.rated == false">
         <button class="btn btn-danger" (click)="onRate(0)"><i class="bi bi-hand-thumbs-down"></i></button>
       </div>
     </div>

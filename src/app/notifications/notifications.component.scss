@@ -3,6 +3,12 @@
     margin-right: 27%;
 }
 
+@media screen and (max-width: 575px) {
+    .content-container {
+        padding-top: 0.5rem !important;
+    }
+}
+
 @media screen and (max-width: 500px){
     #clearing-button {
         position: fixed;
