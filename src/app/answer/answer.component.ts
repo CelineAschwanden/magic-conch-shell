@@ -29,52 +29,58 @@ export class AnswerComponent implements OnInit {
   ngOnInit(): void {}
 
   submit($event: submitInfo) {
-    let assigID: string;
-    this.assignments.subscribe(assig => assigID = assig.find(a => a.questionID == $event.questionID)!.id);
+    let submissions = this.assignments.subscribe(assigs => {
+      let assigID = assigs.find(a => a.questionID == $event.questionID)!.id.trim();
 
-    //Create answer document
-    if($event.type == infoType.answer) {
-      this.store.submitData(
-        'Answers',
-        {
-          content: $event.content,
-          questionID: $event.questionID,
-          userID: this.auth.getUser()?.uid,
-          timestamp: serverTimestamp(),
-        }
-      )
-      .then(data => {
-        this.assignments = this.assignments.pipe(map(assigs => {
-          return assigs.filter(a => a.id != assigID);
-        }));
-        this.assignments.subscribe(assigs => { if(assigs.length == 0) this.empty = true; else this.empty = false; });
-      })
-      .catch(e => {
-        this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
-        console.error(e.message)
-      });
-    }
-    else {
-      //Create rating document
-      this.store.submitData(
-        'QuestionRatings',
-        {
-          questionID: $event.questionID,
-          userID: this.auth.getUser()?.uid,
-          value: $event.content
-        }
-      )
-      .then((data) => {
-        //Set rated in assignment (move to backend)
-        this.store.updateData('QuestionAssignments/' + assigID, {rated: true})
-          .catch((e) => {
-            this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
-            console.log(e.message)
-          });
-      })
-      .catch((e) => {
-        console.error(e.message);
-      });
-    }
+      //Create answer document
+      if($event.type == infoType.answer) {
+        this.store.submitData(
+          'Answers',
+          {
+            content: $event.content,
+            questionID: $event.questionID,
+            userID: this.auth.getUser()?.uid,
+            timestamp: serverTimestamp(),
+            assignmentID: assigID!
+          }
+        )
+        .then(data => {
+          this.assignments = this.assignments.pipe(map(assigs => {
+            return assigs.filter(a => a.id != assigID);
+          }));
+          this.empty = assigs.length == 0 ? true : false;
+          submissions.unsubscribe();
+        })
+        .catch(e => {
+          this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
+          console.error(e.message)
+          submissions.unsubscribe();
+        });
+      }
+      else {
+        //Create rating document
+        this.store.submitData(
+          'QuestionRatings',
+          {
+            questionID: $event.questionID,
+            userID: this.auth.getUser()?.uid,
+            value: $event.content
+          }
+        )
+        .then((data) => {
+          //Set rated in assignment (move to backend)
+          this.store.updateData('QuestionAssignments/' + assigID, {rated: true})
+            .catch((e) => {
+              this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
+              console.log(e.message)
+            });
+          submissions.unsubscribe();
+        })
+        .catch((e) => {
+          console.error(e.message);
+          submissions.unsubscribe();
+        });
+      }
+    });
   }
 }
