@@ -10,15 +10,15 @@
       <div class="col-sm-7">
         <div class="card-body">
           <div *ngIf="notifType === Type.answer">
-            <p class="card-text pb-3 border-bottom border-secondary">
-              You have received an answer for the following question:<br>"{{ relatedTo }}"
+            <p class="card-text pb-3 border-bottom border-secondary fw-bold">
+              You have received an answer for the following question:<br><span class="fw-normal">"{{ relatedTo }}"</span>
             </p>
             <p>{{ content }}</p>
           </div>
           
-          <p class="card-text" *ngIf="notifType === Type.questionRating || notifType === Type.answerRating">
-            Your <span *ngIf="notifType === Type.questionRating; else answerRating">question</span><ng-template #answerRating>answer</ng-template> 
-            "{{ relatedTo }}"<br> got a thumb {{ content }}!
+          <p class="card-text fw-bold" *ngIf="notifType === Type.questionRating || notifType === Type.answerRating">
+            Your <span *ngIf="notifType === Type.questionRating; else answerRating">question</span><ng-template #answerRating>answer</ng-template><br> 
+            <span class="fw-normal">"{{ relatedTo }}"</span><br> got a thumb {{ content }}!
           </p>
         </div>
       </div>

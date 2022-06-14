@@ -37,7 +37,7 @@ export class QuestionComponent {
     this.store.submitData(
       'Questions', 
       {
-        content: this.questionForm.value.question,
+        content: this.questionForm.value.question.trim(),
         timestamp: serverTimestamp(),
         userID: this.auth.getUser()?.uid,
       }

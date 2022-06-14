@@ -37,7 +37,7 @@ export class AnswerComponent implements OnInit {
         this.store.submitData(
           'Answers',
           {
-            content: $event.content,
+            content: $event.content.trim(),
             questionID: $event.questionID,
             userID: this.auth.getUser()?.uid,
             timestamp: serverTimestamp(),
