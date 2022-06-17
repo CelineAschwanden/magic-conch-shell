@@ -1,5 +1,6 @@
 
-<i id="info-icon" class="bi bi-info-square-fill position-fixed cursor-pointer" (click)="openInfo(content)"></i>
+<i id="settings-icon" class="bi bi-gear-fill position-fixed cursor-pointer" (click)="openModal(settings)"></i>
+<i id="info-icon" class="bi bi-info-square-fill position-fixed cursor-pointer" (click)="openModal(info)"></i>
 <button id="logout-button" class="btn btn-danger position-fixed" (click)="logout()">Logout</button>
 
 <div class="container text-center h-100 d-flex flex-column p-3 justify-content-center" id="main-container">
@@ -20,8 +21,19 @@
   </main>
 </div>
 
+<!-- Settings Modal -->
+<ng-template #settings let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Settings</h3>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <button class="btn btn-primary" (click)="requestPermission()">Enable Push Notifications</button>
+  </div>
+</ng-template>
+
 <!-- Info Modal -->
-<ng-template #content let-modal>
+<ng-template #info let-modal>
   <div class="modal-header">
     <h3 class="modal-title" id="modal-basic-title">Info</h3>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>

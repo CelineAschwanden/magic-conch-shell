@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionCardComponent } from '../answer/question-card/question-card.component';
 import { NotifCardComponent } from '../notifications/notif-card/notif-card.component';
+import { MessagingModule } from '@angular/fire/messaging';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { NotifCardComponent } from '../notifications/notif-card/notif-card.compo
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    MessagingModule
   ]
 })
 export class HomeModule { }
