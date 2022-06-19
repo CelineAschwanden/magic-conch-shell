@@ -10,5 +10,6 @@ export const environment = {
     messagingSenderId: '643537807119',
     measurementId: 'G-4SMRX41637',
   },
+  vapidKey: 'BNF7514qYINUGyuzwDVVkDCbFJfGRJS9XAuNs8K8CG4xvye5YkVqtYX50X6vzuuMjI4p1cABAsxxznoQ7Stu6To',
   production: true
 };

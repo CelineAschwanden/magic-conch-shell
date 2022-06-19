@@ -27,8 +27,9 @@
     <h3 class="modal-title" id="modal-basic-title">Settings</h3>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-  <div class="modal-body">
-    <button class="btn btn-primary" (click)="requestPermission()">Enable Push Notifications</button>
+  <div class="modal-body py-4">
+    <button class="btn btn-primary" [disabled]="notifEnabled == true" (click)="requestPermission()">Enable Push Notifications</button>
+    <span *ngIf="notifEnabled == true" class="text-success ms-4 fw-bold">Enabled!</span>
   </div>
 </ng-template>
 
@@ -47,5 +48,16 @@
         clearing your notifications!
       </p><br><br>
       <button class="btn btn-primary mb-2">Feedback</button>
+  </div>
+</ng-template>
+
+<!-- Error modal -->
+<ng-template #errorModal let-modal>
+  <div class="modal-header bg-danger text-white">
+      <h3 class="modal-title" id="modal-basic-title">An error ocurred!</h3>
+      <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body bg-danger text-white">
+      <p>Registration failed</p>
   </div>
 </ng-template>

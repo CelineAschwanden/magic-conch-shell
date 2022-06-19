@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, query, where, collection, doc, addDoc, setDoc, 
-  getDoc, serverTimestamp, WhereFilterOp, Query, DocumentData, collectionData, 
-  QuerySnapshot, DocumentSnapshot, docData, docSnapshots, getDocsFromServer, updateDoc, FieldPath, CollectionReference } from '@angular/fire/firestore';
-import { deleteDoc } from '@firebase/firestore';
+import { Firestore, query, where, collection, doc, addDoc, 
+  getDoc, WhereFilterOp, Query, DocumentData, collectionData, 
+  QuerySnapshot, DocumentSnapshot, docData, docSnapshots, getDocsFromServer, updateDoc, FieldPath, deleteDoc, CollectionReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({

@@ -1,5 +1,5 @@
 
-#info-icon {
+#info-icon, #settings-icon {
     font-size: 2.5rem;
     color: blue;
     top: 1.5rem;
@@ -11,14 +11,17 @@
 }
 
 #settings-icon {
-    font-size: 2.5rem;
-    color: blue;
-    top: 1.5rem;
     right: 12rem;
-
+    transition: transform .7s;
+    
     &:hover {
-        cursor: pointer;
+        transform: rotate(90deg);
     }
+}
+
+#info-icon:hover {
+    opacity: 0.6;
+    transition: 0.4s;
 }
 
 #logout-button {
