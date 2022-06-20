@@ -25,15 +25,10 @@ export class HomeComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true});
   }
 
- requestPermission() {
-  Notification.requestPermission();
-
-  this.messaging.token.subscribe((token) => {
-    this.store.updateData('Users/'+this.auth.getUser()!.uid, { messagingToken: token })
-    .then((data) => this.notifEnabled = true)
-    .catch(e => console.error(e))
-  })
- }
+  requestPermission() {
+    this.messaging.getRegistration();
+    //Reload page after saving token
+  }
 
   logout() {
     this.auth
