@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js';
-import { getMessaging, onBackgroundMessage, isSupported } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-messaging-sw.js';
+import { getMessaging, onBackgroundMessage } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-messaging-sw.js';
 
 const app = initializeApp({
     apiKey: "AIzaSyALiLmZfKcRqliXrv7ltWhT4_O8XYJV5M8",
@@ -12,8 +12,12 @@ const app = initializeApp({
     measurementId: "G-4SMRX41637",
 });
 
-
 const messaging = getMessaging(app);
+
+self.addEventListener( "install", event => {
+  self.skipWaiting();
+  console.log('service worker ready')
+});
 
 onBackgroundMessage(messaging, ({ notification: { title, body, image } }) => {
   self.registration.showNotification(title, { body, icon: image || '/assets/conch-shell-logo.png' });

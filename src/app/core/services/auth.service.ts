@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
-import { doc, Firestore, serverTimestamp, setDoc } from '@angular/fire/firestore';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from '@angular/fire/auth';
 
 import { LoginData } from '../interfaces/login-data.interface';
 
@@ -9,7 +8,11 @@ import { LoginData } from '../interfaces/login-data.interface';
 })
 
 export class AuthService {
-  constructor(private auth: Auth, private firestore: Firestore) { }
+  constructor(private auth: Auth) { }
+
+  getAuth(): Auth {
+    return this.auth;
+  }
 
   login({ email, password }: LoginData) {
     return signInWithEmailAndPassword(this.auth, email, password);

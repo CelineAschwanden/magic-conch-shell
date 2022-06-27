@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MessagingService } from 'src/app/core/services/messaging.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor( private modalService: NgbModal, private formBuilder: FormBuilder,
-    private readonly auth: AuthService, private readonly router: Router,
+    private readonly auth: AuthService, private readonly router: Router, private readonly messaging: MessagingService
   ) { }
 
   get email() {
@@ -35,7 +36,12 @@ export class LoginComponent implements OnInit {
   login() {
     this.auth
       .login(this.loginForm.value)
-      .then(() => this.router.navigate(['/home']))
+      .then(() => {
+        if (Notification.permission === 'granted') {
+          this.messaging.getRegistration();
+        }
+        this.router.navigate(['/home'])
+      })
       .catch((e) => {
         this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
         if(e.message.includes("user-not-found" || e.message.includes("wrong-password")))
