@@ -15,7 +15,7 @@
             <button [routerLink]="['/home/answer']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">Answer Questions</button>
           </div>
           <div class="col-sm h-100 pb-4">
-            <button [routerLink]="['/home/notifications']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">Notifications</button>
+            <button [routerLink]="['/home/notifications']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">View answers & ratings</button>
           </div>
       </div>
   </main>
@@ -28,7 +28,7 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body py-4">
-    <button class="btn btn-primary" [disabled]="notifEnabled == true" (click)="enableNotifications()">Enable Push Notifications</button>
+    <button class="btn btn-primary" [disabled]="notifEnabled == true" (click)="enableNotifications()">Enable Notifications</button>
     <span *ngIf="notifEnabled == true" class="text-success ms-4 fw-bold">Enabled!</span>
   </div>
 </ng-template>

@@ -19,13 +19,5 @@ export class NotificationsComponent implements OnInit {
     this.notifList = store.getCollectionData(store.getCollectionRef('Users/' + this.auth.getUser()?.uid + '/Notifications/'), 'id') as Observable<Notification[]>;
   }
 
-  clearNotifs() {
-    this.notifList.subscribe(notifs => {
-      notifs.forEach(notif => {
-        this.store.deleteData('Users/' + this.auth.getUser()?.uid + '/Notifications/' + notif.id);
-      });
-    });
-  }
-
   ngOnInit(): void {}
 }

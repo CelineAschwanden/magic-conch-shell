@@ -12,6 +12,10 @@ textarea {
     color: white;
 }
 
+#questionmark-icon {
+    -webkit-user-drag: none;
+}
+
 @media screen and (max-width: 1000px) {
     .container {
         width: 50% !important;

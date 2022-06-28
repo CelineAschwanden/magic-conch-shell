@@ -1,4 +1,8 @@
 
+#main-container .row {
+    height: 110px;
+}
+
 #info-icon, #settings-icon {
     font-size: 2.5rem;
     color: blue;
@@ -8,6 +12,10 @@
     &:hover {
         cursor: pointer;
     }
+}
+
+#conch-shell-logo {
+    -webkit-user-drag: none;
 }
 
 #settings-icon {
@@ -48,16 +56,23 @@
     }
 }
 
-@media (max-width: 1375px) {
-    #main-container .row {
-        height: 110px;
-    }
-}
-
-@media (max-width: 1000px) {
+@media (max-width: 1120px) {
     #main-container {
         width: 75% !important;
         max-width: 75% !important;
+    }
+}
+
+@media (max-width: 720px) {
+    #main-container {
+        width: 85% !important;
+        max-width: 85% !important;
+    }
+}
+
+@media (max-width: 635px) {
+    #main-container .row {
+        height: 130px;
     }
 }
 
