@@ -1,13 +1,11 @@
-export enum Type {
-    answer,
-    questionRating,
-    answerRating
-}
+export type NotificationType = 'answer' | 'answerRating' | 'questionRating';
 
 export interface Notification {
     id: string;
-    answerID: string;
-    answerRatingID: string;
-    questionRatingID: string;
+    content: string;
+    context: string;
+    type: NotificationType;
     rated: boolean;
+    timestamp: string;
+    answerID: string;
 }
