@@ -2,6 +2,25 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-icons/font/bootstrap-icons';
 
+$main-button-color: #4e68df;
+
+textarea, textarea:focus, input, input:focus {
+    background-color: rgb(97, 97, 97) !important;
+    color: white !important;
+}
+
+textarea {
+    resize: none;
+}
+
+main h1 {
+    color: rgb(136, 114, 207) !important;
+}
+
+.btn-primary {
+    @include button-variant($main-button-color, darken($main-button-color, 7.5%), rgb(216, 199, 255), lighten($main-button-color,5%), lighten($main-button-color, 10%), darken($main-button-color,30%));
+}
+
 .h-85 {
     height: 85%;
 }
@@ -15,19 +34,46 @@
 }
 
 .main-background {
-    background-color: $teal-200;
+    background-color: rgb(28, 27, 36);
     $enable-negative-margins: true;
 }
 
-.back-arrow {
-    top: 15px;
-    left: 25px;
-    font-size: 2.5rem;
+.modal-header {
+    border-bottom: 1px solid #6e6e6e !important;
+    padding: 1rem 1.5rem;
+}
+
+.modal-header .btn-close {
+    color: white !important;
+}
+
+.modal-content {
+    background-color: #46445a;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body p, .modal-body h4, .modal-title {
+    color: white !important;
+}
+
+.modal-body button {
+    background-color: #5e7bff !important;
     color: black;
+    font-weight: 500;
+}
+
+.back-arrow {
+    top: 20px;
+    left: 30px;
+    font-size: 2.5rem;
+    color: #4e67d4;
 }
 
 .content-container {
-    background-color: #c4defc;
+    background-color: #353b5f;
 }
 
 @media screen and (min-width: 760px) {
@@ -76,4 +122,20 @@
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #bbbee0; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5264b6; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b80df; 
 }

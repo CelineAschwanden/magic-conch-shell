@@ -23,10 +23,10 @@
         </div>
       </div>
 
-      <div class="col-sm-auto py-4 ms-auto" id="thumb-up-button" *ngIf="notification.type == 'answer' && notification.rated == false">
+      <div class="col-sm-auto py-5 ms-auto" id="thumb-up-button" *ngIf="notification.type == 'answer' && notification.rated == false">
         <button class="btn btn-success" (click)="onRate(1)"><i class="bi bi-hand-thumbs-up"></i></button>
       </div>
-      <div class="col-sm-auto py-4 me-auto" id="thumb-down-button" *ngIf="notification.type == 'answer' && notification.rated == false">
+      <div class="col-sm-auto py-5 me-auto" id="thumb-down-button" *ngIf="notification.type == 'answer' && notification.rated == false">
         <button class="btn btn-danger" (click)="onRate(0)"><i class="bi bi-hand-thumbs-down"></i></button>
       </div>
     </div>

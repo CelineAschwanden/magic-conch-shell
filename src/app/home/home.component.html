@@ -25,11 +25,12 @@
 <ng-template #settings let-modal>
   <div class="modal-header">
     <h3 class="modal-title" id="modal-basic-title">Settings</h3>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body py-4">
     <button class="btn btn-primary" [disabled]="notifEnabled == true" (click)="enableNotifications()">Enable Notifications</button>
     <span *ngIf="notifEnabled == true" class="text-success ms-4 fw-bold">Enabled!</span>
+    <br><br><br>
   </div>
 </ng-template>
 
@@ -37,7 +38,7 @@
 <ng-template #info let-modal>
   <div class="modal-header">
     <h3 class="modal-title" id="modal-basic-title">Info</h3>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
       <h4>How it works</h4>

@@ -1,10 +1,15 @@
 
-textarea {
-    resize: none;
+textarea, textarea:focus {
+    background-color: rgb(68, 68, 122) !important;
 }
 
 .card {
-    background-color: rgb(185, 185, 255);
+    background-color: rgb(36, 36, 71);
+    border-radius: 0.75rem;
+}
+
+.card-text {
+    color: rgb(198, 174, 255);
 }
 
 @media screen and (max-width: 575px) {
