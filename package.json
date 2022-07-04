@@ -7,7 +7,7 @@
   "scripts": {
     "ng": "ng",
     "start": "electron-forge start",
-    "build": "ng build --base-href ./ && ngc --lib ES2020,DOM --target ES6 src-backend/main.ts --outDir dist",
+    "build": "ng build --base-href /magic-conch-shell/ && ngc --lib ES2020,DOM --target ES6 src-backend/main.ts --outDir dist",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "package": "electron-forge package",
