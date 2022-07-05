@@ -19,6 +19,7 @@ self.addEventListener( "install", event => {
   console.log('service worker ready')
 });
 
-onBackgroundMessage(messaging, ({ notification: { title, body, image } }) => {
-  self.registration.showNotification(title, { body, icon: image || '/assets/conch-shell-logo.png' });
+onBackgroundMessage(messaging, (payload) => {
+  const notification = payload.data;
+  self.registration.showNotification(notification.title, { body: notification.body, icon: notification.icon });
 });

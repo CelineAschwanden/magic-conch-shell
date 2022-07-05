@@ -13,13 +13,9 @@ import { onAuthStateChanged } from '@angular/fire/auth';
 export class MessagingService {
 
   token: Observable<any> = EMPTY;
-  message: Observable<any> = EMPTY;
   tokenSaved: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private messaging: Messaging, private store: StoreService, private auth: AuthService) {
-    this.message = new Observable(sub => onMessage(messaging, msg => sub.next(msg))).pipe(
-      tap(msg => console.log('FCM', {msg})),
-    );
   }
 
   getRegistration() {

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MessagingService } from './core/services/messaging.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,5 @@ import { MessagingService } from './core/services/messaging.service';
 export class AppComponent {
   title = 'magic-conch-shell';
 
-  constructor(private messaging: MessagingService) {
-    this.messaging.message.subscribe((msg) => console.log(msg));
-  }
+  constructor() {}
 }

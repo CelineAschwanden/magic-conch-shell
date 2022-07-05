@@ -15,8 +15,7 @@ export class NotifCardComponent implements OnInit {
   @Input() notification: Notification | null = null;
   @Output() rateEvent = new EventEmitter<rateData>();
 
-  constructor(private store: StoreService, private auth: AuthService) {}
-
+  constructor() {}
   ngOnInit(): void {}
 
   onRate(rateValue: number) {
