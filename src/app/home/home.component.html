@@ -48,7 +48,33 @@
         <br><br>-Mind that as of now you won't be able to see past answers and ratings anymore after 
         clearing your notifications!
       </p><br><br>
-      <button class="btn btn-primary mb-2">Feedback</button>
+      <button class="btn btn-primary mb-2" (click)="openModal(feedback)">Feedback</button>
+  </div>
+</ng-template>
+
+<!-- Feedback Form Modal -->
+<ng-template #feedback let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title">Feedback</h3>
+    <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+      <form>
+        <label class="form-label" for="feedbackField">Let me know about any suggestions, criticism <br>or feature requests!</label>
+        <textarea class="form-control" type="text" id="feedbackField" rows="5" #feedbackField></textarea>
+        <button class="btn btn-primary form-control" (click)="sendFeedback(feedbackField.value)">Send</button>
+      </form>
+  </div>
+</ng-template>
+
+<!-- Success modal -->
+<ng-template #successModal let-modal>
+  <div class="modal-header bg-success text-white">
+      <h3 class="modal-title" id="modal-basic-title">Sent!</h3>
+      <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body bg-danger text-white">
+      <p>Thanks! Your feedback was successfully submitted!</p>
   </div>
 </ng-template>
 
@@ -59,6 +85,6 @@
       <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body bg-danger text-white">
-      <p>Registration failed</p>
+      <p>The question could not be answered or rated.</p>
   </div>
 </ng-template>

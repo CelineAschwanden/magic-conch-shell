@@ -43,7 +43,7 @@ main h1 {
     padding: 1rem 1.5rem;
 }
 
-.modal-header .btn-close {
+.modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body label {
     color: white !important;
 }
 
@@ -53,10 +53,6 @@ main h1 {
 
 .modal-body {
     padding: 1.5rem;
-}
-
-.modal-body p, .modal-body h4, .modal-title {
-    color: white !important;
 }
 
 .modal-body button {

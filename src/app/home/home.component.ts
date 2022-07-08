@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../core/services/auth.service';
 import { MessagingService } from '../core/services/messaging.service';
+import { StoreService } from '../core/services/store.service';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +14,33 @@ import { MessagingService } from '../core/services/messaging.service';
 
 export class HomeComponent implements OnInit {
 
+  @ViewChild('successModal') successModal: TemplateRef<any> | any;
   @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
   notifEnabled: boolean = false;
+  modalref: any;
 
-  constructor(private modalService: NgbModal, private auth: AuthService, private router: Router, private messaging: MessagingService) {
+  constructor(
+    private modalService: NgbModal, 
+    private auth: AuthService, 
+    private router: Router, 
+    private messaging: MessagingService, 
+    private store: StoreService
+  ) {
     this.updateSettings();
   }
 
   openModal(content: any) {
+    this.modalService.dismissAll();
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true});
   }
 
+  logout() {
+    this.auth
+      .logout()
+      .then(() => this.router.navigate(['/']))
+      .catch((e) => console.log(e.message))
+  }
+  
   enableNotifications() {
     this.messaging.getRegistration()
     this.messaging.tokenSaved.subscribe((value) => {
@@ -32,11 +49,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  logout() {
-    this.auth
-      .logout()
-      .then(() => this.router.navigate(['/']))
-      .catch((e) => console.log(e.message))
+  sendFeedback(value: string) {
+    this.modalService.dismissAll();
+    this.store.submitData('Feedback', {content: value})
+    .then(res => {
+      this.modalService.dismissAll();
+      this.modalService.open(this.successModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
+    })
+    .catch(e => {
+      this.modalService.dismissAll();
+      this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
+    });
   }
 
   updateSettings() {
