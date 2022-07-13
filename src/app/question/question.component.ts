@@ -25,7 +25,7 @@ export class QuestionComponent {
   ) { }
 
   onSubmit(): void {
-    let limit: number = 0;
+    let limit = 0;
     this.store.getDocSnapshot('Settings/limits', '')
       .then(limits => limit = limits.get('questionLimit'))
       .catch(e => { 
@@ -35,8 +35,7 @@ export class QuestionComponent {
 
     //Create question document
     this.store.submitData(
-      'Questions', 
-      {
+      'Questions', {
         content: this.questionForm.value.question.trim(),
         timestamp: serverTimestamp(),
         userID: this.auth.getUser()?.uid,

@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('successModal') successModal: TemplateRef<any> | any;
   @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
   notifEnabled: boolean = false;
+  feedbackLimited: boolean = false;
   modalref: any;
 
   constructor(
@@ -50,13 +51,33 @@ export class HomeComponent implements OnInit {
   }
 
   sendFeedback(value: string) {
+    let limit = 0;
+    this.store.getDocSnapshot('Settings/limits', '')
+      .then(limits => limit = limits.get('questionLimit'))
+      .catch(e => { 
+        console.error(e.message);
+      });
+
     this.modalService.dismissAll();
-    this.store.submitData('Feedback', {content: value})
+    this.store.submitData(
+      'Feedback', {
+        content: value, 
+        userID: this.auth.getUser()?.uid
+      }
+    )
     .then(res => {
       this.modalService.dismissAll();
       this.modalService.open(this.successModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
     })
     .catch(e => {
+      //Check timestamp of last entry 
+      this.store.getFeedbackTimestamp(this.auth.getUser()!.uid)
+        .then((entryTime) => {
+          if(entryTime != null && limit > (Math.floor((Date.now() - entryTime!.getTime()) / 1000)))
+            this.feedbackLimited = true;
+        })
+
+      console.error(e.message);
       this.modalService.dismissAll();
       this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
     });

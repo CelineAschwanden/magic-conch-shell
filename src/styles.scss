@@ -43,7 +43,7 @@ main h1 {
     padding: 1rem 1.5rem;
 }
 
-.modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body label {
+.modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body label, .modal-body button {
     color: white !important;
 }
 
@@ -57,8 +57,6 @@ main h1 {
 
 .modal-body button {
     background-color: #5e7bff !important;
-    color: black;
-    font-weight: 500;
 }
 
 .back-arrow {

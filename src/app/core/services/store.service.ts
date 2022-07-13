@@ -62,4 +62,14 @@ export class StoreService {
           return null;
       });
   }
+
+  getFeedbackTimestamp(userID: string): Promise<Date | null> {
+    return getDoc(doc(this.firestore, '/Users/' + userID))
+      .then((doc) => { 
+        if ( doc.get("lastFeedback") != undefined )
+          return doc.get("lastFeedback").toDate();
+        else
+          return null;
+      });
+  }
 }

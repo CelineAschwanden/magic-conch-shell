@@ -42,11 +42,9 @@
   </div>
   <div class="modal-body">
       <h4>How it works</h4>
-      <p>-Questions may only be created once in 3 minutes.
-        <br>-After you've created a question, it gets assigned to some random users.
-        <br>-Please write questions and answers in english.
-        <br><br>-Mind that as of now you won't be able to see past answers and ratings anymore after 
-        clearing your notifications!
+      <p>- After you've created a question, it gets assigned to some random users.
+        <br>- Questions may only be created once in 3 minutes.
+        <br>- Please write questions and answers in english.
       </p><br><br>
       <button class="btn btn-primary mb-2" (click)="openModal(feedback)">Feedback</button>
   </div>
@@ -70,21 +68,23 @@
 <!-- Success modal -->
 <ng-template #successModal let-modal>
   <div class="modal-header bg-success text-white">
-      <h3 class="modal-title" id="modal-basic-title">Sent!</h3>
+      <h3 class="modal-title" id="modal-basic-title">Thanks!</h3>
       <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-  <div class="modal-body bg-danger text-white">
-      <p>Thanks! Your feedback was successfully submitted!</p>
+  <div class="modal-body bg-success text-white">
+      <p>Your feedback was successfully submitted!</p>
   </div>
 </ng-template>
 
 <!-- Error modal -->
 <ng-template #errorModal let-modal>
   <div class="modal-header bg-danger text-white">
-      <h3 class="modal-title" id="modal-basic-title">An error ocurred!</h3>
+      <h3 class="modal-title" id="modal-basic-title" *ngIf="feedbackLimited == false">An error ocurred!</h3>
+      <h3 class="modal-title" id="modal-basic-title" *ngIf="feedbackLimited == true">Too many entries</h3>
       <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body bg-danger text-white">
-      <p>The question could not be answered or rated.</p>
+      <p *ngIf="feedbackLimited == false">Your feedback could not be submitted!</p>
+      <p *ngIf="feedbackLimited == true">Please try again later.</p>
   </div>
 </ng-template>
