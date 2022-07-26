@@ -1,9 +1,10 @@
 
+<div id="pw-reset-link" class="position-fixed"><a [routerLink]="['/password-reset']">Forgot password?</a></div>
 <button [routerLink]="['/register']" id="reg-button" class="btn btn-lg btn-primary position-fixed">Register</button>
 
 <div class="container text-center h-100 d-flex flex-column p-3 justify-content-center" id="main-container">
     <main>
-        <img width="150" src="assets/conch_shell_logo.png">
+        <img width="130" src="assets/conch_shell_logo.png">
         <h1 class="mt-4">Login</h1>
         <div class="row align-items-center mt-5">
             <form [formGroup]="loginForm" (ngSubmit)="login()">
@@ -14,8 +15,9 @@
                     <label for="passwordInput" class="form-label mt-3">Password</label>
                     <input type="password" id="passwordInput" class="form-control" formControlName="password" required>
                 </div>
+                <div id="pw-reset-link-mobile" class="mt-4 d-none"><a [routerLink]="['/password-reset']">Forgot password?</a></div>
 
-                <button type="submit" [disabled]="loginForm.invalid" class="col h-100 mt-5 btn btn-lg btn-primary">Submit</button>
+                <button type="submit" [disabled]="loginForm.invalid" class="col h-100 mt-5 btn btn-lg btn-primary">Login</button>
             </form>
         </div>
 

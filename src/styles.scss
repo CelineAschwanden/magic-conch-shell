@@ -18,7 +18,7 @@ main h1 {
 }
 
 .btn-primary {
-    @include button-variant($main-button-color, darken($main-button-color, 7.5%), rgb(216, 199, 255), lighten($main-button-color,5%), lighten($main-button-color, 10%), darken($main-button-color,30%));
+    @include button-variant($main-button-color, darken($main-button-color, 7.5%), rgb(227, 214, 255), lighten($main-button-color,5%), lighten($main-button-color, 10%), darken($main-button-color,30%));
 }
 
 .h-85 {
@@ -43,8 +43,8 @@ main h1 {
     padding: 1rem 1.5rem;
 }
 
-.modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body label, .modal-body button {
-    color: white !important;
+main p, .modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body label, .modal-body button {
+    color: rgb(227, 219, 255) !important;
 }
 
 .modal-content {
@@ -132,4 +132,13 @@ main h1 {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #6b80df; 
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(182, 182, 182) !important;
+    opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(179, 168, 219);
 }

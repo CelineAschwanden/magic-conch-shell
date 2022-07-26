@@ -8,6 +8,11 @@ label {
     right: 2rem;
 }
 
+#pw-reset-link {
+    top: 2.5rem;
+    right: 11rem;
+}
+
 #main-container {
     width: 20%;
 }
@@ -31,6 +36,12 @@ label {
     #main-container {
         width: 75% !important;
         max-width: 75% !important;
+    }
+    #pw-reset-link {
+        display: none !important;
+    }
+    #pw-reset-link-mobile {
+        display: block !important;
     }
 }
 

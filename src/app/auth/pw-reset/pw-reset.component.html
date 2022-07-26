@@ -1,1 +1,39 @@
-<p>pw-reset works!</p>
+
+<a routerLink="/login">
+    <i class="bi bi-arrow-left-square-fill position-fixed back-arrow"></i>
+</a>
+
+<div class="container text-center h-100 d-flex flex-column p-3 justify-content-center" id="main-container">
+    <main>
+        <i class="bi bi-info-circle"></i>
+        <h1 class="mt-4">Password Reset</h1>
+        <div class="row align-items-center mt-5" *ngIf="sent == false">
+            <p>Please enter your email and we'll send you a link to reset your password.</p>
+            <form [formGroup]="pwResetForm" (ngSubmit)="requestReset(emailInput.value)">
+                <div class="text-start">
+                    <input #emailInput type="email" class="form-control mt-4" formControlName="email" placeholder="Your Email" required>
+                </div>
+
+                <button id="submitButtton" type="submit" [disabled]="pwResetForm.invalid" class="col h-100 mt-5 btn btn-lg btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <!-- Success card -->
+        <div class="card bg-success mb-5 mt-5" *ngIf="sent == true">
+            <div class="card-body text-white">
+                <h5 class="card-title">Email sent!</h5>
+            </div>
+        </div>
+
+        <!-- Error modal -->
+        <ng-template #errorModal let-modal>
+            <div class="modal-header bg-danger text-white">
+              <h3 class="modal-title" id="modal-basic-title">Error</h3>
+              <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body bg-danger text-white">
+                <p>Could not send password reset email.</p>
+            </div>
+          </ng-template>
+    </main>
+  </div>

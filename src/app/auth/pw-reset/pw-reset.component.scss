@@ -1,0 +1,50 @@
+
+main i {
+    color: rgb(194, 194, 194);
+}
+
+#main-container {
+    width: 20%;
+}
+
+#main-container main {
+    margin-top: -10%;
+}
+
+#main-container .row {
+    margin-top: 5rem;
+}
+
+#main-container i {
+    font-size: 125px;
+    color: rgb(194, 194, 194);
+}
+
+
+@media (max-width: 1440px) {
+    #main-container {
+        width: 32% !important;
+        max-width: 32% !important;
+    }
+}
+
+@media (max-width: 765px) {
+    #main-container {
+        width: 75% !important;
+        max-width: 75% !important;
+    }
+}
+
+@media (max-width: 575px) {
+    #main-container .row {
+        height: 70px;
+    }
+    #main-container main {
+        margin-top: -10rem;
+    }
+    #reg-button {
+        font-size: 1rem;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+}
