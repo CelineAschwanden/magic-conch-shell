@@ -1,0 +1,23 @@
+<div class="card mt-3 mb-4" *ngIf="message">
+    <div class="row py-4">
+
+      <div class="card-icon col-sm-2 py-2 text-center">
+        <i class="bi bi-patch-question-fill" *ngIf="message.type === 'question'"></i>
+        <i class="bi bi-chat-dots" *ngIf="message.type === 'answer'"></i>
+      </div>
+
+      <div class="message-text col-sm-7 d-flex justify-content-center flex-column">
+        <span *ngIf="message.type === 'answer'" id="message-context" class="pb-3 mb-3 border-bottom border-secondary">
+            Your answer to the question "{{message.context}}"
+        </span>
+        <span>{{message.content}}</span>
+      </div>
+
+      <div id="rating-numbers" class="card-icon col-sm-2 d-flex align-items-center">
+        <i class="bi bi-hand-thumbs-up text-success mx-2"></i>
+        <span>{{message.thumbsUp}}</span>
+        <i class="bi bi-hand-thumbs-down text-danger mx-2"></i>
+        <span>{{message.thumbsDown}}</span>
+      </div>
+    </div>
+  </div>

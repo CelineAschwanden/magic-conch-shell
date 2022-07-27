@@ -23,7 +23,12 @@ export class AnswerComponent implements OnInit {
   constructor(private auth: AuthService, private store: StoreService, private modalService: NgbModal) {
     const assigQuery = store.dataQuery('QuestionAssignments', 'userID', '==', this.auth.getUser()?.uid);
     this.assignments = store.getCollectionData(assigQuery, 'id') as Observable<Assignment[]>
-    this.assignments.subscribe(assigs => { if(assigs.length == 0) this.empty = true; else this.empty = false; });
+    this.assignments.subscribe(assigs => { 
+      if(assigs.length == 0) 
+        this.empty = true; 
+      else 
+        this.empty = false; 
+    });
   }
 
   ngOnInit(): void {}

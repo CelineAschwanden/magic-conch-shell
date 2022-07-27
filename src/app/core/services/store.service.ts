@@ -2,14 +2,22 @@ import { Injectable } from '@angular/core';
 import { Firestore, query, where, collection, doc, addDoc, 
   getDoc, WhereFilterOp, Query, DocumentData, collectionData, 
   QuerySnapshot, DocumentSnapshot, docData, docSnapshots, getDocsFromServer, updateDoc, FieldPath, deleteDoc, CollectionReference } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { Message } from 'src/app/history/message-card/message';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class StoreService {
-  constructor(private firestore: Firestore,) { }
+
+  messages: Observable<Message[]> | null = null;
+  
+  constructor(private firestore: Firestore, private auth: AuthService) {
+    this.getMessages();
+  }
 
   submitData(collectionName: string, data: any) {
     return addDoc(collection(this.firestore, collectionName), data);
@@ -71,5 +79,12 @@ export class StoreService {
         else
           return null;
       });
+  }
+
+  getMessages(): void {
+    if (this.auth.getUser != null) {
+      const messagesRef = this.getCollectionRef('Users/' + this.auth.getUser()?.uid + '/Messages/');
+      this.messages = this.getCollectionData(messagesRef, 'id') as Observable<Message[]>;
+    }
   }
 }

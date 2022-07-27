@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, from, Observable, tap, of, Subject, BehaviorSubject } from 'rxjs';
+import { EMPTY, from, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { StoreService } from './store.service';
-import { getToken, Messaging, onMessage } from '@angular/fire/messaging';
+import { getToken, Messaging } from '@angular/fire/messaging';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { onAuthStateChanged } from '@angular/fire/auth';

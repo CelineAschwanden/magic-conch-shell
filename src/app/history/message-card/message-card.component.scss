@@ -1,0 +1,66 @@
+
+.card-icon i {
+    color: rgb(236, 236, 236);
+    font-size: 2.5em;
+}
+
+.card-icon span {
+    font-size: 18px;
+}
+
+.card {
+    background-color: rgb(36, 36, 71);
+    border-radius: 0.75rem;
+}
+
+.card span, .card p {
+    color: rgb(198, 174, 255);
+}
+
+#rating-numbers {
+    margin-left: -5px;
+}
+
+#message-context {
+    font-size: 14px;
+    color: rgb(170, 148, 223);
+}
+
+@media screen and (max-width: 1000px) {
+    .card-icons {
+        padding-left: 30px;
+        padding-right: 0px;
+    }
+    #thumb-up-button {
+        padding-right: 0px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .card-icon, .message-text {
+        width: 100%;
+        justify-content: center;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 12.5px;
+    }
+    .message-text {
+        align-items: center;
+    }
+    .row {
+        padding: 0 !important;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .card-icons {
+        padding: 0px 12px !important;
+    }
+    #thumb-up-button, #thumb-down-button {
+        display: flex !important;
+        justify-content: center;
+        margin-top: 0 !important;
+        padding-bottom: 5px !important;
+        width: auto;
+    }
+}

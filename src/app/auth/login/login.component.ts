@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessagingService } from 'src/app/core/services/messaging.service';
+import { StoreService } from 'src/app/core/services/store.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   });
 
   constructor( private modalService: NgbModal, private formBuilder: FormBuilder,
-    private readonly auth: AuthService, private readonly router: Router, private readonly messaging: MessagingService
+    private readonly auth: AuthService, private readonly router: Router, private readonly messaging: MessagingService,
+    private readonly store: StoreService,
   ) { }
 
   get email() {
@@ -37,9 +39,9 @@ export class LoginComponent implements OnInit {
     this.auth
       .login(this.loginForm.value)
       .then(() => {
-        if (Notification.permission === 'granted') {
+        if (Notification.permission === 'granted')
           this.messaging.getRegistration();
-        }
+        this.store.getMessages();
         this.router.navigate(['/home'])
       })
       .catch((e) => {
