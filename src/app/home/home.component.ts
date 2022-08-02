@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { MessagingService } from '../core/services/messaging.service';
 import { StoreService } from '../core/services/store.service';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
   notifEnabled: boolean = false;
   feedbackLimited: boolean = false;
+  newAnswer: boolean = false;
   modalref: any;
 
   constructor(
@@ -28,6 +30,7 @@ export class HomeComponent implements OnInit {
     private store: StoreService
   ) {
     this.updateSettings();
+    store.messages?.pipe(skip(1)).subscribe(messages => { this.newAnswer = true; });
   }
 
   openModal(content: any) {

@@ -5,7 +5,9 @@
 
 <div class="container text-center h-100 d-flex flex-column p-3 justify-content-center">
     <main>
-        <img id="questionmark-icon" class="mb-5" width="150" src="assets/question_mark.png">
+        <div class="mb-5">
+            <i class="bi bi-patch-question-fill"></i>
+        </div>
         <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" *ngIf="sent == false && error == false">
             <textarea class="form-control mb-5" rows="5" maxlength="250" formControlName="question"></textarea>
             <button type="submit" class="btn btn-primary btn-lg mb-3">Send</button>

@@ -4,7 +4,7 @@ main i {
 }
 
 #main-container {
-    width: 20%;
+    width: 25%;
 }
 
 #main-container main {
@@ -20,15 +20,14 @@ main i {
     color: rgb(194, 194, 194);
 }
 
-
 @media (max-width: 1440px) {
     #main-container {
-        width: 32% !important;
-        max-width: 32% !important;
+        width: 35% !important;
+        max-width: 35% !important;
     }
 }
 
-@media (max-width: 765px) {
+@media (max-width: 810px) {
     #main-container {
         width: 75% !important;
         max-width: 75% !important;

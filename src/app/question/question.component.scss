@@ -3,13 +3,14 @@
     width: 35%;
 }
 
+main i {
+    color: rgb(226, 226, 226);
+    font-size: 100px;
+}
+
 #retry-button {
     background-color: #9e212e;
     color: white;
-}
-
-#questionmark-icon {
-    -webkit-user-drag: none;
 }
 
 @media screen and (max-width: 1000px) {

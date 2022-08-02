@@ -15,7 +15,10 @@
             <button [routerLink]="['/home/answer']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">Answer Questions</button>
           </div>
           <div class="col-sm h-100 pb-4">
-            <button [routerLink]="['/home/history']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary">View answers & ratings</button>
+            <button [routerLink]="['/home/history']" routerLinkActive="router-link-active"  class="col h-100 btn btn-lg btn-primary position-relative">
+              View answers & ratings
+              <span *ngIf="newAnswer == true" class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+            </button>
           </div>
       </div>
   </main>
@@ -28,7 +31,7 @@
     <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body py-4">
-    <button class="btn btn-primary" [disabled]="notifEnabled == true" (click)="enableNotifications()">Enable Notifications</button>
+    <button class="btn btn-primary" [disabled]="notifEnabled == true" (click)="enableNotifications()">Enable Push Notifications</button>
     <span *ngIf="notifEnabled == true" class="text-success ms-4 fw-bold">Enabled!</span>
     <br><br><br>
   </div>

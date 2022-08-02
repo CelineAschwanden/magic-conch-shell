@@ -1,29 +1,48 @@
 
-.card-icon i {
+.card-icon i, #answers-dropdown i {
     color: rgb(236, 236, 236);
-    font-size: 2.5em;
 }
 
-.card-icon span {
-    font-size: 18px;
+.card-icon {
+    & i {
+        font-size: 2.5em;
+    }
+    & span {
+        font-size: 18px;
+    }
 }
 
 .card {
     background-color: rgb(36, 36, 71);
     border-radius: 0.75rem;
-}
-
-.card span, .card p {
-    color: rgb(198, 174, 255);
+    & span, & p {
+        color: rgb(198, 174, 255);
+    }
 }
 
 #rating-numbers {
-    margin-left: -5px;
+    & i {
+        font-size: 2.2em;
+    }
 }
 
 #message-context {
     font-size: 14px;
     color: rgb(170, 148, 223);
+}
+
+#answers-dropdown {
+    margin-bottom: -20px;
+    & > i {
+        font-size: 2.1em;
+    }
+    & .card {
+        background-color: rgb(54, 54, 122);
+    }
+    & .card-body {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -37,30 +56,46 @@
 }
 
 @media screen and (max-width: 900px) {
-    .card-icon, .message-text {
+    .card-icon, .message-text, #rating-numbers {
         width: 100%;
-        justify-content: center;
+        justify-content: center !important;
         padding-left: 30px;
-        padding-right: 30px;
+        padding-right: 30px !important;
         padding-bottom: 12.5px;
     }
     .message-text {
         align-items: center;
     }
-    .row {
+    #message-card > .row {
         padding: 0 !important;
+    }
+    #rating-numbers {
+        margin-left: -5px;
+    }
+    #answers-dropdown {
+        margin-bottom: 0px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    #answer-button, #thumb-up-button, #thumb-down-button {
+        display: flex !important;
+        justify-content: center;
+        margin-top: 2em !important;
+    }
+    #send-button, #cancel-button, #thumb-up-button, #thumb-down-button {
+        width: auto;
+    }
+    #send-button, #thumb-down-button {
+        margin-right: auto;
+    }
+    #cancel-button, #thumb-up-button {
+        margin-left: auto;
     }
 }
 
 @media screen and (max-width: 575px) {
     .card-icons {
         padding: 0px 12px !important;
-    }
-    #thumb-up-button, #thumb-down-button {
-        display: flex !important;
-        justify-content: center;
-        margin-top: 0 !important;
-        padding-bottom: 5px !important;
-        width: auto;
     }
 }

@@ -4,6 +4,10 @@
 
 $main-button-color: #4e68df;
 
+html {
+    font-size: 17px;
+}
+
 textarea, textarea:focus, input, input:focus {
     background-color: rgb(97, 97, 97) !important;
     color: white !important;
@@ -72,8 +76,8 @@ main p, .modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body 
 
 @media screen and (min-width: 760px) {
     .content-container {
-        padding-left: 3.5rem !important;
-        padding-right: 3.5rem !important;
+        padding-left: 3.0rem !important;
+        padding-right: 3.0rem !important;
     }
 }
 
@@ -99,11 +103,11 @@ main p, .modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body 
 
 @media screen and (min-width: 1700px) {
     .content-container {
-        margin-left: 20rem;
-        margin-right: 20rem;
+        margin-left: 22rem;
+        margin-right: 22rem;
     }
     #clearing-button {
-        margin-right: 20rem;
+        margin-right: 22rem;
     }
 }
 
