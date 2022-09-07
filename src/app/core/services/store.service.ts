@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Firestore, query, where, collection, doc, addDoc, 
   getDoc, WhereFilterOp, Query, DocumentData, collectionData, 
   QuerySnapshot, DocumentSnapshot, docData, docSnapshots, getDocsFromServer, updateDoc, FieldPath, deleteDoc, CollectionReference } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { Message } from 'src/app/history/message-card/message';
+import { Message } from 'src/app/core/interfaces/message';
 import { AuthService } from './auth.service';
 
 @Injectable({

@@ -1,7 +1,7 @@
 
 export interface AnswerMessage {
     id: string;
-    answerID: string;
+    contentID: string;
     content: string;
     rated: boolean;
     timestamp: string;

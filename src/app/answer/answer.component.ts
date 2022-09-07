@@ -63,28 +63,8 @@ export class AnswerComponent implements OnInit {
         });
       }
       else {
-        //Create rating document
-        this.store.submitData(
-          'QuestionRatings',
-          {
-            questionID: $event.questionID,
-            userID: this.auth.getUser()?.uid,
-            value: $event.content
-          }
-        )
-        .then((data) => {
-          //Set rated in assignment (move to backend)
-          this.store.updateData('QuestionAssignments/' + assigID, {rated: true})
-            .catch((e) => {
-              this.modalService.open(this.errorModal, {ariaLabelledBy: 'modal-basic-title', centered: true});
-              console.log(e.message)
-            });
-          submissions.unsubscribe();
-        })
-        .catch((e) => {
-          console.error(e.message);
-          submissions.unsubscribe();
-        });
+        //Call rate function
+        
       }
     });
   }

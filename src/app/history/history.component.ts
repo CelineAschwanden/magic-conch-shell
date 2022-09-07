@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 import { StoreService } from '../core/services/store.service';
 
-import { Message } from './message-card/message';
-import { rateData } from './message-card/rateData';
+import { Message } from '../core/interfaces/message';
+import { rateData } from '../core/interfaces/rateData';
+import { FunctionsService } from '../core/services/http-service.service';
 
 @Component({
   selector: 'app-history',
@@ -15,22 +16,13 @@ export class HistoryComponent implements OnInit {
 
   messageList: Message[] | null = null;
 
-  constructor(private store: StoreService, private auth: AuthService) {
+  constructor(private store: StoreService, private auth: AuthService, private http: FunctionsService) {
     store.messages?.subscribe(messages => { this.messageList = messages; });
   }
 
   onRate($event: rateData) {
-    this.store.submitData(
-      'Users/' + this.auth.getUser()?.uid + '/Ratings', {
-        answerID: $event.answerID,
-        value: $event.value,
-      }
-    ).then(() => {
-      this.store.updateData('Users/' + this.auth.getUser()?.uid + '/Messages/' + $event.messageID + '/Answers/' + $event.answerID, 
-        {rated: true})
-      .catch(e => { console.error(e) });
-    })
-    .catch(e => { console.error(e) });
+    this.http.sendRating($event)
+    .catch(e => console.error(e.message));
   }
 
   ngOnInit(): void {}
