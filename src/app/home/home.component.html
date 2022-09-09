@@ -33,7 +33,11 @@
   <div class="modal-body py-4">
     <button class="btn btn-primary" [disabled]="notifEnabled == true" (click)="enableNotifications()">Enable Push Notifications</button>
     <span *ngIf="notifEnabled == true" class="text-success ms-4 fw-bold">Enabled!</span>
-    <br><br><br>
+      <div *ngIf="notifLoading == true" class="spinner-border ms-4 text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    <br><br>
+    <button class="btn btn-danger mt-5" (click)="openModal(deleteAcc)">Delete Account</button>
   </div>
 </ng-template>
 
@@ -65,6 +69,18 @@
         <textarea class="form-control" type="text" id="feedbackField" rows="5" #feedbackField></textarea>
         <button class="btn btn-primary form-control" (click)="sendFeedback(feedbackField.value)">Send</button>
       </form>
+  </div>
+</ng-template>
+
+<!-- Confirm deletetion modal -->
+<ng-template #deleteAcc let-modal>
+  <div class="modal-header bg-danger text-white">
+      <h3 class="modal-title" id="modal-basic-title">Are you sure about that?</h3>
+      <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body bg-danger pt-3 text-white d-flex flex-column align-items-center">
+      <img width="250" class="me-3" src="../../assets/john-cena-are-you-sure-about-that.gif">
+      <button id="deletion-confirm-btn" class="btn btn-danger mt-5" (click)="deleteAccount()">Confirm</button>
   </div>
 </ng-template>
 

@@ -53,6 +53,17 @@
     margin-top: 5rem;
 }
 
+#deletion-confirm-btn {
+    background-color: #b02a37;
+    &:hover {
+        background-color: #8f222d;
+    }
+}
+
+.modal-body .spinner-border {
+    margin-bottom: -0.5rem;
+}
+
 @media (max-width: 1650px) {
     #main-container {
         width: 48% !important;

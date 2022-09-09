@@ -14,10 +14,10 @@
       </div>
 
       <div id="rating-numbers" class="rating-icon col-sm-2 d-flex align-items-center justify-content-end pe-0">
-        <i class="bi bi-hand-thumbs-up text-success mx-2"></i>
-        <span>{{message.thumbsUp}}</span>
-        <i class="bi bi-hand-thumbs-down text-danger mx-2"></i>
-        <span>{{message.thumbsDown}}</span>
+        <i *ngIf="message.type == 'question' || message.thumbsUp >= 1" class="bi bi-hand-thumbs-up text-success mx-2"></i>
+        <span *ngIf="message.type == 'question'">{{message.thumbsUp}}</span>
+        <i *ngIf="message.type == 'question' || message.thumbsDown >= 1" class="bi bi-hand-thumbs-down text-danger mx-2"></i>
+        <span *ngIf="message.type == 'question'">{{message.thumbsDown}}</span>
       </div>
 
       <div *ngIf="message.type == 'question'" id="answers-dropdown" class="text-center">

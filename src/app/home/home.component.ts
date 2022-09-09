@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('successModal') successModal: TemplateRef<any> | any;
   @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
   notifEnabled: boolean = false;
+  notifLoading: boolean = false;
   feedbackLimited: boolean = false;
   newAnswer: boolean = false;
   modalref: any;
@@ -46,11 +47,14 @@ export class HomeComponent implements OnInit {
   }
   
   enableNotifications() {
-    this.messaging.getRegistration()
+    this.notifLoading = true;
     this.messaging.tokenSaved.subscribe((value) => {
-      if (value == true)
+      if (value == true) {
         this.updateSettings();
+        this.notifLoading = false;
+      }
     });
+    this.messaging.getRegistration()
   }
 
   sendFeedback(value: string) {
@@ -91,6 +95,11 @@ export class HomeComponent implements OnInit {
       this.notifEnabled = true;
     else
       this.notifEnabled = false;
+  }
+
+  deleteAccount() {
+    this.auth.getUser()!.delete();
+    this.router.navigate(['/login'])
   }
 
   ngOnInit(): void {}
