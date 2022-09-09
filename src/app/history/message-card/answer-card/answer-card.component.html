@@ -1,0 +1,16 @@
+<div *ngIf="answerMessage" class="card mx-3 mb-3">
+    <div class="card-body row g-0 px-5 py-4 align-items-center ">
+      <div class="col-sm-8 ps-3 text-start">
+        <span>{{ answerMessage.content }}</span>
+      </div>
+      <div *ngIf="answerMessage.isLoadingRate == true" class="spinner-border text-light col-sm-auto ms-auto me-3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div *ngIf="answerMessage.rated == false" class="col-sm-auto ms-auto" id="thumb-up-button">
+        <button class="btn btn-success" (click)="onRate(1)"><i class="bi bi-hand-thumbs-up"></i></button>
+      </div>
+      <div *ngIf="answerMessage.rated == false" class="col-sm-auto ms-3 pe-3" id="thumb-down-button">
+        <button class="btn btn-danger" (click)="onRate(0)"><i class="bi bi-hand-thumbs-down"></i></button>
+      </div>
+    </div>
+  </div>

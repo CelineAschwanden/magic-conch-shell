@@ -25,19 +25,7 @@
         <i *ngIf="isCollapsed == false" type="button" class="bi bi-caret-up-fill" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"></i>
         
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-          <div *ngFor="let answerMessage of answerMessages | async" class="card mx-3 mb-3">
-            <div class="card-body row g-0 px-5 py-4 align-items-center ">
-              <div class="col-sm-8 text-start">
-                <span>{{ answerMessage.content }}</span>
-              </div>
-              <div *ngIf="answerMessage.rated == false" class="col-sm-auto ms-auto" id="thumb-up-button">
-                <button class="btn btn-success" (click)="onRate(answerMessage.id, answerMessage.contentID, 1)"><i class="bi bi-hand-thumbs-up"></i></button>
-              </div>
-              <div *ngIf="answerMessage.rated == false" class="col-sm-auto ms-3" id="thumb-down-button">
-                <button class="btn btn-danger" (click)="onRate(answerMessage.id, answerMessage.contentID, 0)"><i class="bi bi-hand-thumbs-down"></i></button>
-              </div>
-            </div>
-          </div>
+          <app-answer-card *ngFor="let answerMsg of answerMessages | async" [answerMessage]="answerMsg" [messageID]="message.id"></app-answer-card>
         </div>
       </div>
 

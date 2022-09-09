@@ -5,4 +5,5 @@ export interface AnswerMessage {
     content: string;
     rated: boolean;
     timestamp: string;
+    isLoadingRate: boolean;
 }

@@ -12,7 +12,7 @@
 
     <div class="h-85 px-5 pb-5 pt-4 content-frame">
         <div class=" h-100 border border-dark px-3 py-4 content-container overflow-auto">
-            <app-message-card *ngFor="let msg of messageList" [message]="msg" (rateEvent)="onRate($event)"></app-message-card>
+            <app-message-card *ngFor="let msg of messageList" [message]="msg"></app-message-card>
         </div>
     </div>
 </div>

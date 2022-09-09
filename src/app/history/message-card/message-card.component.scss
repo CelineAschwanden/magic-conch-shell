@@ -36,23 +36,6 @@
     & > i {
         font-size: 2.1em;
     }
-    & .card {
-        background-color: rgb(54, 54, 122);
-    }
-    & .card-body {
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .card-icons {
-        padding-left: 30px;
-        padding-right: 0px;
-    }
-    #thumb-up-button {
-        padding-right: 0px;
-    }
 }
 
 @media screen and (max-width: 900px) {
@@ -74,28 +57,5 @@
     }
     #answers-dropdown {
         margin-bottom: 0px;
-    }
-}
-
-@media screen and (max-width: 650px) {
-    #answer-button, #thumb-up-button, #thumb-down-button {
-        display: flex !important;
-        justify-content: center;
-        margin-top: 2em !important;
-    }
-    #send-button, #cancel-button, #thumb-up-button, #thumb-down-button {
-        width: auto;
-    }
-    #send-button, #thumb-down-button {
-        margin-right: auto;
-    }
-    #cancel-button, #thumb-up-button {
-        margin-left: auto;
-    }
-}
-
-@media screen and (max-width: 575px) {
-    .card-icons {
-        padding: 0px 12px !important;
     }
 }
