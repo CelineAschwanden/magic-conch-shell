@@ -79,8 +79,21 @@
       <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body bg-danger pt-3 text-white d-flex flex-column align-items-center">
-      <img width="250" class="me-3" src="../../assets/john-cena-are-you-sure-about-that.gif">
+      <img width="250" class="me-3" src="./assets/john-cena-are-you-sure-about-that.gif">
       <button id="deletion-confirm-btn" class="btn btn-danger mt-5" (click)="deleteAccount()">Confirm</button>
+  </div>
+</ng-template>
+
+<!-- Confirm deletetion modal -->
+<ng-template #confirmDeletion let-modal>
+  <div class="modal-header bg-danger text-white">
+      <h3 class="modal-title" id="modal-basic-title">Confirmation</h3>
+      <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body bg-danger pt-3 text-white d-flex flex-column align-items-center">
+      <p>Please enter your password to confirm the deletion.</p>
+      <input type="password" class="form-control" #passwordConfirm>
+      <button id="deletion-confirm-btn" class="btn btn-danger mt-5" (click)="confirmAccDelete(passwordConfirm.value)">Confirm</button>
   </div>
 </ng-template>
 

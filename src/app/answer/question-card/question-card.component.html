@@ -24,11 +24,11 @@
       <button class="btn btn-lg btn-primary" (click)="isAnswering = true">Answer</button>
     </div>
 
-    <div class="col-sm-auto my-auto ms-auto" id="cancel-button" *ngIf="isAnswering == true">
-      <button class="btn btn-sm btn-danger me-4" (click)="isAnswering = false; answer = ''">Cancel</button>
+    <div class="col-sm-auto ms-auto" id="send-button" *ngIf="isAnswering == true">
+      <button class="btn btn-lg btn-primary me-4" (click)="onSubmit(infoType.answer, answer)">Send</button>
     </div>
-    <div class="col-sm-auto" id="send-button" *ngIf="isAnswering == true">
-      <button class="btn btn-lg btn-primary" (click)="onSubmit(infoType.answer, answer)">Send</button>
+    <div class="col-sm-auto my-auto" id="cancel-button" *ngIf="isAnswering == true">
+      <button class="btn btn-sm btn-danger" (click)="isAnswering = false; answer = ''">Cancel</button>
     </div>
   </div>
 

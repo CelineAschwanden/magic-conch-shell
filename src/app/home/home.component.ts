@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('successModal') successModal: TemplateRef<any> | any;
   @ViewChild('errorModal') errorModal: TemplateRef<any> | any;
+  @ViewChild('confirmDeletion') confirmDeletion: TemplateRef<any> | any;
   notifEnabled: boolean = false;
   notifLoading: boolean = false;
   feedbackLimited: boolean = false;
@@ -98,8 +99,19 @@ export class HomeComponent implements OnInit {
   }
 
   deleteAccount() {
-    this.auth.getUser()!.delete();
-    this.router.navigate(['/login'])
+    this.auth.getUser()!.delete()
+    .then(() => {
+      this.router.navigate(['/login']);
+      this.modalService.dismissAll();
+    })
+    .catch(() => {
+      this.modalService.open(this.confirmDeletion, {ariaLabelledBy: 'modal-basic-title', centered: true});
+    });
+  }
+
+  confirmAccDelete(password: string) {
+    this.auth.reAuth(password)
+    .then(() => this.deleteAccount());
   }
 
   ngOnInit(): void {}

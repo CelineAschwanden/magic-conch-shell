@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, sendPasswordResetEmail, reauthenticateWithCredential, EmailAuthProvider } from '@angular/fire/auth';
 
 import { LoginData } from '../interfaces/login-data.interface';
 
@@ -32,5 +32,10 @@ export class AuthService {
 
   sendPwReset(email: string) {
     return sendPasswordResetEmail(this.auth, email);
+  }
+
+  reAuth(password: string) {
+    const credentials = EmailAuthProvider.credential(this.auth.currentUser?.email!, password);
+    return reauthenticateWithCredential(this.auth.currentUser!, credentials);
   }
 }
