@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnswerMessage } from 'src/app/core/interfaces/answerMessage';
 import { rateData } from 'src/app/core/interfaces/rateData';
-import { FunctionsService } from 'src/app/core/services/http-service.service';
+import { FunctionsService } from 'src/app/core/services/functions.service';
 
 @Component({
   selector: 'app-answer-card',

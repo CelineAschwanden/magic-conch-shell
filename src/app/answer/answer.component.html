@@ -25,6 +25,6 @@
         <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body bg-danger text-white">
-        <p>The question could not be answered or rated.</p>
+        <p>{{ errorMessage }}</p>
     </div>
 </ng-template>

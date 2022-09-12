@@ -5,7 +5,8 @@ export enum infoType {
 }
 
 export interface submitInfo {
-    questionID: string;
     content: string;
-    type: infoType;
+    questionID: string;
+    assignmentID: string;
+    rateError: boolean;
 }

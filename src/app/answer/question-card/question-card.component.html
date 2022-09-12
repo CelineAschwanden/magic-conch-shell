@@ -3,7 +3,7 @@
     <div class="col-sm-7">
       <div>
         <p class="card-text">
-          {{ content }}
+          {{ assignment.questionContent }}
         </p>
       </div>
     </div>
@@ -14,18 +14,21 @@
       </div>
     </div>
 
+    <div *ngIf="loadingRating == true" class="spinner-border text-light col-sm-auto ms-auto me-3" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
     <div class="col-sm-auto ms-auto" id="thumb-up-button" *ngIf="isAnswering == false && assignment.rated == false">
-      <button class="btn btn-success" (click)="onSubmit(infoType.rating, '1')"><i class="bi bi-hand-thumbs-up"></i></button>
+      <button class="btn btn-success" (click)="submitRating(1)"><i class="bi bi-hand-thumbs-up"></i></button>
     </div>
     <div class="col-sm-auto ms-3" id="thumb-down-button" *ngIf="isAnswering == false && assignment.rated == false">
-      <button class="btn btn-danger" (click)="onSubmit(infoType.rating, '0')"><i class="bi bi-hand-thumbs-down"></i></button>
+      <button class="btn btn-danger" (click)="submitRating(0)"><i class="bi bi-hand-thumbs-down"></i></button>
     </div>
     <div class="col-sm-auto ms-auto" id="answer-button" *ngIf="isAnswering == false">
       <button class="btn btn-lg btn-primary" (click)="isAnswering = true">Answer</button>
     </div>
 
     <div class="col-sm-auto ms-auto" id="send-button" *ngIf="isAnswering == true">
-      <button class="btn btn-lg btn-primary me-4" (click)="onSubmit(infoType.answer, answer)">Send</button>
+      <button class="btn btn-lg btn-primary me-4" (click)="submitAnswer(answer)">Send</button>
     </div>
     <div class="col-sm-auto my-auto" id="cancel-button" *ngIf="isAnswering == true">
       <button class="btn btn-sm btn-danger" (click)="isAnswering = false; answer = ''">Cancel</button>
