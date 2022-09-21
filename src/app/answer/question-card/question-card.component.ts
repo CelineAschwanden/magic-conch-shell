@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FunctionsService } from 'src/app/core/services/functions.service';
-import { StoreService } from 'src/app/core/services/store.service';
 
 import { Assignment } from '../../core/interfaces/assignment';
-import { submitInfo, infoType } from '../../core/interfaces/submitInfo';
+import { submitInfo } from '../../core/interfaces/submitInfo';
 
 @Component({
   selector: 'app-question-card',
@@ -18,21 +17,13 @@ export class QuestionCardComponent implements OnInit {
 
   answer: string = "";
   isAnswering: boolean = false;
-  loadingRating = false;
 
-  constructor(private store: StoreService, private http: FunctionsService) { }
+  constructor(private http: FunctionsService) { }
 
   submitRating(value: number) {
-    this.loadingRating = true;
+    //change status for immediate visual update
     this.assignment!.rated = true;
 
-    console.log({
-      value: value,
-      contentID: this.assignment!.questionID,
-      messageID: "",
-      answerMessageID: "",
-      assignmentID: this.assignment!.id
-    });
     this.http.sendRating({
       value: value,
       contentID: this.assignment!.questionID,
@@ -40,12 +31,7 @@ export class QuestionCardComponent implements OnInit {
       answerMessageID: "",
       assignmentID: this.assignment!.id
     })
-    .then(() => {
-      this.loadingRating = false;
-      this.assignment!.rated = true;
-    })
     .catch((e) => {
-      this.loadingRating = false;
       this.assignment!.rated = false;
       this.submitEvent.emit({rateError: true, questionID: "", content: "", assignmentID: ""});
     });

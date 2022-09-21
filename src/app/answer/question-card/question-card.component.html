@@ -14,9 +14,6 @@
       </div>
     </div>
 
-    <div *ngIf="loadingRating == true" class="spinner-border text-light col-sm-auto ms-auto me-3" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
     <div class="col-sm-auto ms-auto" id="thumb-up-button" *ngIf="isAnswering == false && assignment.rated == false">
       <button class="btn btn-success" (click)="submitRating(1)"><i class="bi bi-hand-thumbs-up"></i></button>
     </div>

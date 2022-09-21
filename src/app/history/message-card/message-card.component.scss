@@ -38,6 +38,10 @@
     }
 }
 
+#noQuestionsMsg {
+    color: #9393ff !important;
+}
+
 @media screen and (max-width: 900px) {
     .card-icon, .message-text, #rating-numbers {
         width: 100%;

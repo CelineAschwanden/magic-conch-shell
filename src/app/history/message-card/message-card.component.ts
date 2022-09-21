@@ -33,7 +33,6 @@ export class MessageCardComponent implements OnInit {
 
       this.answerMessages = this.store.getCollectionData(answersRef, 'id') as Observable<AnswerMessage[]>;
       this.answerMessages.subscribe(messages => {
-        console.log(messages);
         if (messages.length < 1)
           this.answersEmpty = true;
         else
