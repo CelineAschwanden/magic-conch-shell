@@ -12,19 +12,19 @@
 
     <div class="h-85 px-5 pb-5 pt-4 content-frame">
         <div class="d-flex flex-column h-100 border border-dark px-3 py-4 content-container overflow-auto">
-            <app-message-card *ngFor="let msg of messageList" [message]="msg"></app-message-card>
+            <app-message-card *ngFor="let msg of messageList" [message]="msg" (rateError)="displayRateError()"></app-message-card>
             <div class="align-self-center my-auto text-center"><h3 *ngIf="empty == true">You haven't created any questions or answers yet.</h3></div>
         </div>
     </div>
 </div>
 
 <!-- Error modal -->
-<ng-template #errorModal let-modal>
+<ng-template #rateErrorModal let-modal>
     <div class="modal-header bg-danger text-white">
         <h3 class="modal-title" id="modal-basic-title">An error ocurred!</h3>
         <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body bg-danger text-white">
-        <p>{{ errorMessage }}</p>
+        <p>The answer could not be rated.</p>
     </div>
 </ng-template>

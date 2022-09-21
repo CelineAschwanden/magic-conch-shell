@@ -1,9 +1,8 @@
 
 export interface AnswerMessage {
     id: string;
-    contentID: string;
+    answerID: string;
     content: string;
     rated: boolean;
     timestamp: string;
-    isLoadingRate: boolean;
 }

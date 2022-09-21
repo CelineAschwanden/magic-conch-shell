@@ -29,7 +29,7 @@
         
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
           <p *ngIf="answersEmpty == true" class="mt-3 mb-4">This question was not answered yet.</p>
-          <app-answer-card *ngFor="let answerMsg of answerMessages | async" [answerMessage]="answerMsg" [messageID]="message.id"></app-answer-card>
+          <app-answer-card *ngFor="let answerMsg of answerMessages | async" [answerMessage]="answerMsg" [messageID]="message.id" (rateError)="passError()"></app-answer-card>
         </div>
       </div>
 

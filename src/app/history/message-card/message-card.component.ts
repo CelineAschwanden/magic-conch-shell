@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -16,6 +16,7 @@ import { Message } from '../../core/interfaces/message';
 export class MessageCardComponent implements OnInit {
 
   @Input() message: Message | null = null;
+  @Output() rateError = new EventEmitter<boolean>();
   @ViewChild('collapse') collapsible: TemplateRef<NgbCollapse> | any;
   answerMessages: Observable<AnswerMessage[]> | null = null;
   public isCollapsed = true;
@@ -31,19 +32,24 @@ export class MessageCardComponent implements OnInit {
         'Users/' + this.auth.getUser()?.uid + '/Messages/' + this.message?.id + '/Answers/');
 
       this.answerMessages = this.store.getCollectionData(answersRef, 'id') as Observable<AnswerMessage[]>;
-      this.answerMessages.subscribe(messages => { 
-        setTimeout(() => { 
-          this.loadingAnswers = false;
-          this.collapsible.toggle();
-        }, 300);
+      this.answerMessages.subscribe(messages => {
+        console.log(messages);
         if (messages.length < 1)
           this.answersEmpty = true;
         else
           this.answersEmpty = false;
       });
+      setTimeout(() => {
+        this.loadingAnswers = false;
+        this.collapsible.toggle();
+      }, 400);
     } else {
       this.collapsible.toggle();
     }
+  }
+
+  passError() {
+    this.rateError.emit();
   }
 
   ngOnInit(): void {}
