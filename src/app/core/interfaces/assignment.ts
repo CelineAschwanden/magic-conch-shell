@@ -1,3 +1,4 @@
+import { Timestamp } from '@angular/fire/firestore' 
 
 export interface Assignment {
     id: string;
@@ -5,4 +6,5 @@ export interface Assignment {
     questionID: string;
     rated: boolean;
     userID: string;
+    timestamp: Timestamp;
 }
