@@ -87,9 +87,6 @@ main p, .modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body 
         margin-left: 8rem;
         margin-right: 8rem;
     }
-    #clearing-button {
-        margin-right: 8rem;
-    }
 }
 
 @media screen and (min-width: 1500px) {
@@ -97,17 +94,11 @@ main p, .modal-header, .modal-body p, .modal-body h4, .modal-title, .modal-body 
         margin-left: 15rem;
         margin-right: 15rem;
     }
-    #clearing-button {
-        margin-right: 15rem;
-    }
 }
 
 @media screen and (min-width: 1700px) {
     .content-container {
         margin-left: 22rem;
-        margin-right: 22rem;
-    }
-    #clearing-button {
         margin-right: 22rem;
     }
 }

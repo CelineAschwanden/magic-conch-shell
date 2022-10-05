@@ -17,8 +17,21 @@ export class QuestionCardComponent implements OnInit {
 
   answer: string = "";
   isAnswering: boolean = false;
+  timestampDate: Date = new Date; 
+  limitTime: string = '00:00';
 
-  constructor(private http: FunctionsService) { }
+  constructor(private http: FunctionsService) {}
+
+  ngOnInit(): void {
+    this.timestampDate = this.assignment?.timestamp.toDate()!;
+    this.limitTime = new Date(this.timestampDate.getTime() + 7*60000)
+      .toTimeString().split(' ')[0].slice(0, -3);
+    let minute = parseInt(this.limitTime.slice(-1));
+    if (minute < 6 && minute > 1)
+      this.limitTime = this.limitTime.replace(/.$/,"6");
+    else
+      this.limitTime = this.limitTime.replace(/.$/,"1");
+  }
 
   submitRating(value: number) {
     //change status for immediate visual update
@@ -47,5 +60,10 @@ export class QuestionCardComponent implements OnInit {
     this.submitEvent.emit(info);
   }
 
-  ngOnInit(): void {}
+  extendTimeLimit() {
+    console.log(this.assignment?.extended);
+    if (this.assignment?.extended == false)
+      this.http.extendAnswerTimeLimit(this.assignment.id)
+      .catch(e => console.log(e));
+  }
 }

@@ -7,4 +7,5 @@ export interface Assignment {
     rated: boolean;
     userID: string;
     timestamp: Timestamp;
+    extended: boolean;
 }

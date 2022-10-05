@@ -12,7 +12,20 @@ textarea, textarea:focus {
     color: rgb(198, 174, 255);
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 850px) {
+    #question-content-text, #answer-button {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    #question-options, #answer-options {
+        margin-right: auto;
+    }
+    #answer-button {
+        margin-left: 0px !important;
+        & p {
+            margin-left: 2rem;
+        }
+    }
     .textarea-mobile {
         display: flex !important;
 

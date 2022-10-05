@@ -14,4 +14,9 @@ export class FunctionsService {
     const callable = httpsCallable(this.functions, 'onRate');
     return callable(data);
   }
+
+  extendAnswerTimeLimit(assignmentID: string): Promise<HttpsCallableResult<unknown>> {
+    const callable = httpsCallable(this.functions, 'extendAnswerTimeLimit');
+    return callable(assignmentID);
+  }
 }
