@@ -1,5 +1,12 @@
 # MagicConchShell
 
+This is a school project from M306 in BBZW Sursee 04/2022.<br>
+Firebase was used as backend for it.<br><br>
+
+With this Angular web app users can create questions and have them assigned to other random users.<br>
+In a history page one can see their own questions and answers.<br>
+Both can be rated with a thumb up or down.<br><br>
+
 ## Build
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
@@ -13,18 +20,9 @@ Run `npm start`
 To get live reloading, replace `mainWindow.loadFile(path.join(__dirname, "../dist/magic-conch-shell/index.html"));`
 in the `src-backend/main.ts` with `mainWindow.loadURL('http://localhost:4200/');` and run `ng serve`.
 
-
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
+<br><br>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
